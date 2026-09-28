@@ -84,12 +84,14 @@ export default function HomePage() {
       </div>
 
       {/* Shop by craving */}
-      <Reveal as="section" className="mx-auto max-w-6xl px-4 py-12 sm:px-6" aria-labelledby="cravings">
+      <Reveal as="section" className="mx-auto max-w-6xl px-4 py-12 sm:px-6" aria-labelledby="cravings-heading">
         <SectionHeading
+          id="cravings-heading"
           eyebrow="Follow your craving"
           title="What are you in the mood for?"
+          blurb="Three doors, one oven. Pick whichever one is calling your name — you can always change your mind afterwards."
           linkHref="/shop"
-          linkLabel="Shop everything"
+          linkLabel="See everything we make"
         />
         <div className="grid gap-4 sm:grid-cols-3">
           {[
@@ -113,7 +115,7 @@ export default function HomePage() {
                 </div>
                 <div className="flex items-center justify-between px-3 py-3">
                   <div>
-                    <h3 id={c.href === "/cakes" ? "cravings" : undefined} className="font-display text-2xl font-black">
+                    <h3 className="font-display text-2xl font-black">
                       {c.name}
                     </h3>
                     <p className="text-sm font-semibold text-choco/70">{c.text}</p>

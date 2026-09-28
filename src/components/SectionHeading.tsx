@@ -1,6 +1,12 @@
 import Link from "next/link";
 
 interface SectionHeadingProps {
+  /**
+   * Lets the caller point `aria-labelledby` at this heading. Sections used to be
+   * labelled by a heading nested deep inside the first card, which meant the
+   * accessible name of the whole section came from an unrelated element.
+   */
+  id?: string;
   eyebrow: string;
   title: string;
   blurb?: string;
@@ -9,6 +15,7 @@ interface SectionHeadingProps {
 }
 
 export default function SectionHeading({
+  id,
   eyebrow,
   title,
   blurb,
@@ -19,7 +26,7 @@ export default function SectionHeading({
     <div className="mb-6 flex flex-wrap items-center justify-between gap-x-6 gap-y-3">
       <div>
         <p className="text-label uppercase text-berry">{eyebrow}</p>
-        <h2 className="mt-1.5 font-display text-heading text-berry">{title}</h2>
+        <h2 id={id} className="mt-1.5 font-display text-heading text-berry">{title}</h2>
         {blurb && <p className="mt-2 max-w-xl text-body text-choco/70">{blurb}</p>}
       </div>
       {linkHref && linkLabel && (
