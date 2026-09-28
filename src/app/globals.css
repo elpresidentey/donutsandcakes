@@ -1,0 +1,317 @@
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,900&family=Quicksand:wght@400;500;600;700&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Fraunces", "Georgia", serif;
+  --font-sans: "Quicksand", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+    sans-serif;
+
+  --color-cream: #fff9f1;
+  --color-milk: #ffffff;
+  --color-choco: #3e2a20;
+  --color-cocoa: #241611;
+
+  /* Rose family. Deliberately muted: strawberry is a soft raspberry rather
+     than a neon pink, because saturated magenta reads as "cosmetics" next to
+     warm cake photography. Big fills use berry, which is deeper and calmer;
+     strawberry is reserved for accents. Contrast vs white: strawberry 5.1:1,
+     berry 9.2:1 — both clear WCAG AA for white text. */
+  --color-strawberry: #b04a76;
+  --color-berry: #6d2148;
+  --color-blush: #f9e8ef;
+  --color-rose: #e8b9d2;
+
+  --color-butter: #ffe1a8;
+  --color-honey: #e9a100;
+  --color-tangerine: #ff8a4c;
+
+  --color-mint: #bfebce;
+  --color-leaf: #1e7a46;
+
+  --color-lilac: #dcd2ff;
+  --color-grape: #6c4fc4;
+
+  --color-sky: #c9e7ff;
+  --color-ocean: #1d6fb8;
+
+  /* ---------------------------------------------------------------------
+     Type scale. One ladder for the whole app so headings stop drifting
+     between 3xl/4xl/5xl/6xl/7xl at random. Each step is set with
+     `clamp()` so it also shrinks smoothly on narrow phones instead of
+     relying on a breakpoint jump.
+
+     Display is for page + hero titles, heading for section titles,
+     subhead for card titles, body for running text, label for the small
+     uppercase eyebrows. Anything bigger than `display` wraps.
+  --------------------------------------------------------------------- */
+  --text-display: clamp(2.25rem, 1.6rem + 3.2vw, 3.75rem);
+  --text-display--line-height: 1.05;
+  --text-display--letter-spacing: -0.02em;
+  --text-display--font-weight: 900;
+
+  --text-heading: clamp(1.6rem, 1.3rem + 1.5vw, 2.25rem);
+  --text-heading--line-height: 1.15;
+  --text-heading--letter-spacing: -0.015em;
+  --text-heading--font-weight: 900;
+
+  --text-subhead: clamp(1.125rem, 1.05rem + 0.4vw, 1.375rem);
+  --text-subhead--line-height: 1.25;
+  --text-subhead--font-weight: 700;
+
+  --text-body: 1rem;
+  --text-body--line-height: 1.65;
+
+  --text-label: 0.75rem;
+  --text-label--line-height: 1.2;
+  --text-label--letter-spacing: 0.16em;
+  --text-label--font-weight: 800;
+
+  --animate-fade-up: fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-float-slow: float 10s ease-in-out infinite;
+  --animate-wiggle: wiggle 2.4s ease-in-out infinite;
+  --animate-pop: pop 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  --animate-marquee: marquee 28s linear infinite;
+  /* Replayed by remounting the live preview whenever a builder option changes,
+     so every tap feels like it lands on the product. */
+  --animate-preview-pop: preview-pop 0.5s cubic-bezier(0.34, 1.4, 0.64, 1);
+  /* Slow drift on the hero photo — cinematic "Ken Burns" without a video */
+  --animate-ken-burns: ken-burns 9s ease-out forwards;
+  /* Fill bar showing time until the hero advances */
+  --animate-hero-progress: hero-progress 6s linear forwards;
+
+  @keyframes preview-pop {
+    from {
+      opacity: 0.35;
+      transform: scale(0.94) rotate(-0.6deg);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1) rotate(0deg);
+    }
+  }
+  @keyframes ken-burns {
+    from {
+      transform: scale(1.04) translate3d(0, 0, 0);
+    }
+    to {
+      transform: scale(1.16) translate3d(-1.5%, -1.2%, 0);
+    }
+  }
+  @keyframes hero-progress {
+    from {
+      transform: scaleX(0);
+    }
+    to {
+      transform: scaleX(1);
+    }
+  }
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(22px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0) rotate(-1deg);
+    }
+    50% {
+      transform: translateY(-12px) rotate(1.5deg);
+    }
+  }
+  @keyframes wiggle {
+    0%,
+    100% {
+      transform: rotate(-3deg);
+    }
+    50% {
+      transform: rotate(3deg);
+    }
+  }
+  @keyframes pop {
+    from {
+      opacity: 0;
+      transform: scale(0.92);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Anchored sections (skip link, in-page jumps) must not land under the sticky
+   header, which is 64px tall. */
+:target,
+[id] {
+  scroll-margin-top: 5rem;
+}
+
+/* Text inputs keep a visible focus ring. A few component classes used to set
+   `focus:outline-none` for a "clean" border-only treatment; that silently
+   removed the global :focus-visible outline, so keyboard users lost the
+   indicator entirely. Border + ring together is the accessible pattern. */
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 3px solid var(--color-strawberry);
+  outline-offset: 2px;
+}
+
+body {
+  background: var(--color-cream);
+  color: var(--color-choco);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--color-strawberry);
+  color: #fff;
+}
+
+/* ---------------------------------------------------------------------------
+   Scroll reveal. Elements start visible (no-JS / pre-hydration safe); the
+   `data-state="hidden"` attribute is only ever set from JS, for content that is
+   still below the fold. `data-state="shown"` simply removes the offset.
+--------------------------------------------------------------------------- */
+.reveal {
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal[data-state="hidden"] {
+  opacity: 0;
+}
+.reveal[data-state="hidden"][data-variant="up"] {
+  transform: translateY(28px);
+}
+.reveal[data-state="hidden"][data-variant="left"] {
+  transform: translateX(-28px);
+}
+.reveal[data-state="hidden"][data-variant="right"] {
+  transform: translateX(28px);
+}
+.reveal[data-state="hidden"][data-variant="scale"] {
+  transform: scale(0.96);
+}
+
+/* Specular sweep across primary buttons on hover/focus. */
+.shine {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+.shine::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    100deg,
+    transparent 25%,
+    rgb(255 255 255 / 0.38) 50%,
+    transparent 75%
+  );
+  transform: translateX(-130%);
+  transition: transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.shine:hover::after,
+.shine:focus-visible::after {
+  transform: translateX(130%);
+}
+
+/* Slow ambient drift for decorative glows. Transform-only, so it stays on the
+   compositor and never triggers layout. */
+@keyframes drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(4%, -6%, 0) scale(1.14);
+  }
+}
+.blob {
+  animation: drift 22s ease-in-out infinite;
+  will-change: transform;
+}
+.blob-slow {
+  animation-duration: 36s;
+  animation-direction: reverse;
+}
+
+/* Dotted pastel texture used behind sections */
+.texture-dots {
+  background-image: radial-gradient(
+    color-mix(in srgb, var(--color-strawberry) 16%, transparent) 1.5px,
+    transparent 1.5px
+  );
+  background-size: 22px 22px;
+}
+
+.texture-dots-light {
+  background-image: radial-gradient(#ffffff2e 1.5px, transparent 1.5px);
+  background-size: 20px 20px;
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* ---------------------------------------------------------------------------
+   Focus visibility. Kept as a bare `:focus-visible` (specificity 0,1,0) so it
+   is easy to reason about — component classes must never set `focus:outline-none`,
+   because that utility (0,2,0) would beat this rule and leave keyboard users
+   with no visible indicator at all.
+--------------------------------------------------------------------------- */
+:focus-visible {
+  outline: 3px solid var(--color-strawberry);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* Belt and braces for form controls, which sit on coloured fills. */
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  border-color: var(--color-berry);
+}
+
+/* Respect users who prefer no motion: site must work without animation */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

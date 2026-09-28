@@ -1,0 +1,33 @@
+{
+  "name": "Donuts & Cakes — Build Your Dessert",
+  "short_name": "Donuts&Cakes",
+  "description": "Premium Nigerian dessert studio. Build custom cakes, donut boxes and smoothies in Lagos.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#fff9f1",
+  "theme_color": "#f94f7e",
+  "lang": "en-NG",
+  "categories": ["food", "shopping"],
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
