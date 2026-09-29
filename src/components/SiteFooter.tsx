@@ -3,13 +3,13 @@ import { LogoMark } from "./SiteHeader";
 
 export default function SiteFooter() {
   return (
-    <footer className="mt-16 bg-cocoa text-cream">
-      <div className="texture-dots-light mx-auto grid max-w-6xl gap-10 px-4 py-12 sm:px-6 md:grid-cols-4">
+    <footer className="mt-16 border-t-4 border-ember bg-cocoa text-cream">
+      <div className="mx-auto grid max-w-6xl gap-10 px-4 py-12 sm:px-6 md:grid-cols-4">
         <div className="md:col-span-2">
           <div className="flex items-center gap-2">
             <LogoMark className="h-10 w-10" />
             <p className="font-display text-2xl font-black">
-              Donuts<span className="text-rose">&</span>Cakes
+              Donuts<span className="text-honey">&</span>Cakes
             </p>
           </div>
           <p className="mt-3 max-w-sm text-sm leading-relaxed text-cream/75">
@@ -24,22 +24,22 @@ export default function SiteFooter() {
         </div>
 
         <nav aria-label="Shop links">
-          <h2 className="text-label uppercase text-rose">Shop</h2>
+          <h2 className="text-label uppercase text-honey">Shop</h2>
           <ul className="mt-3 space-y-1 text-sm font-semibold">
-            <li><Link className="inline-flex min-h-[32px] items-center hover:text-rose" href="/cakes">Cakes</Link></li>
-            <li><Link className="inline-flex min-h-[32px] items-center hover:text-rose" href="/donuts">Donuts</Link></li>
-            <li><Link className="inline-flex min-h-[32px] items-center hover:text-rose" href="/smoothies">Smoothies &amp; Juices</Link></li>
-            <li><Link className="inline-flex min-h-[32px] items-center hover:text-rose" href="/shop">Everything</Link></li>
+            <li><Link className="inline-flex min-h-[32px] items-center hover:text-honey" href="/cakes">Cakes</Link></li>
+            <li><Link className="inline-flex min-h-[32px] items-center hover:text-honey" href="/donuts">Donuts</Link></li>
+            <li><Link className="inline-flex min-h-[32px] items-center hover:text-honey" href="/smoothies">Smoothies &amp; Juices</Link></li>
+            <li><Link className="inline-flex min-h-[32px] items-center hover:text-honey" href="/shop">Everything</Link></li>
           </ul>
         </nav>
 
         <nav aria-label="Build links">
-          <h2 className="text-label uppercase text-rose">Build</h2>
+          <h2 className="text-label uppercase text-honey">Build</h2>
           <ul className="mt-3 space-y-1 text-sm font-semibold">
-            <li><Link className="inline-flex min-h-[32px] items-center hover:text-rose" href="/build/cake">Cake builder</Link></li>
-            <li><Link className="inline-flex min-h-[32px] items-center hover:text-rose" href="/build/donuts">Donut box builder</Link></li>
-            <li><Link className="inline-flex min-h-[32px] items-center hover:text-rose" href="/build/smoothie">Smoothie builder</Link></li>
-            <li><Link className="inline-flex min-h-[32px] items-center hover:text-rose" href="/cart">Your cart</Link></li>
+            <li><Link className="inline-flex min-h-[32px] items-center hover:text-honey" href="/build/cake">Cake builder</Link></li>
+            <li><Link className="inline-flex min-h-[32px] items-center hover:text-honey" href="/build/donuts">Donut box builder</Link></li>
+            <li><Link className="inline-flex min-h-[32px] items-center hover:text-honey" href="/build/smoothie">Smoothie builder</Link></li>
+            <li><Link className="inline-flex min-h-[32px] items-center hover:text-honey" href="/cart">Your cart</Link></li>
           </ul>
         </nav>
       </div>

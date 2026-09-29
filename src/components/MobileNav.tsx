@@ -56,7 +56,7 @@ export default function MobileNav() {
                 aria-current={active ? "page" : undefined}
                 className={cn(
                   "relative flex min-h-[64px] flex-col items-center justify-center gap-1 text-[11px] font-bold",
-                  active ? "text-berry" : "text-choco/70"
+                  active ? "text-ember" : "text-choco/70"
                 )}
               >
                 <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
@@ -71,12 +71,12 @@ export default function MobileNav() {
                 {t.href === "/cart" && count > 0 && (
                   <span
                     aria-hidden="true"
-                    className="absolute right-1/2 top-1 flex h-5 min-w-5 translate-x-5 items-center justify-center rounded-full bg-gradient-to-br from-berry to-strawberry px-1 text-[10px] font-black text-white"
+                    className="absolute right-1/2 top-1 flex h-5 min-w-5 translate-x-5 items-center justify-center rounded-full bg-ember px-1 text-[10px] font-black text-white"
                   >
                     {count}
                   </span>
                 )}
-                {active && <span aria-hidden className="absolute bottom-1 h-1 w-8 rounded-full bg-strawberry" />}
+                {active && <span aria-hidden className="absolute bottom-1 h-1 w-8 rounded-full bg-ember" />}
               </Link>
             </li>
           );

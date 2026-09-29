@@ -36,7 +36,7 @@ export default function ShopPage() {
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6">
-      <p className="text-label uppercase text-berry">The full counter</p>
+      <p className="text-label uppercase text-ember">The full counter</p>
       <h1 className="mt-1 font-display text-display">
         Everything we bake
       </h1>
@@ -79,7 +79,7 @@ export default function ShopPage() {
               "min-h-[44px] shrink-0 rounded-full px-5 text-sm font-bold transition active:scale-95",
               filter === f
                 ? "bg-choco text-cream"
-                : "bg-milk text-choco shadow-sm hover:bg-blush"
+                : "bg-milk text-choco shadow-sm hover:bg-sand"
             )}
           >
             {filterName(f)}{" "}

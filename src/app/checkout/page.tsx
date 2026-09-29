@@ -81,7 +81,7 @@ export default function CheckoutPage() {
         <div className="mt-6 flex flex-wrap justify-center gap-3">
           <Link
             href="/build"
-            className="shine min-h-[52px] rounded-full bg-gradient-to-br from-berry to-strawberry px-8 py-3 font-display text-lg font-black text-white"
+            className="min-h-[52px] rounded-full bg-ember px-8 py-3 font-display text-lg font-black text-white transition hover:bg-ember-deep"
           >
             Build something
           </Link>
@@ -157,7 +157,7 @@ export default function CheckoutPage() {
         <h1 ref={doneRef} tabIndex={-1} className="mt-4 font-display text-display outline-none">
           It&apos;s ours now — thank you
         </h1>
-        <p className="mt-2 font-bold text-berry">Order {orderNo}</p>
+        <p className="mt-2 font-bold text-ember-deep">Order {orderNo}</p>
         <p className="mx-auto mt-3 max-w-md text-choco/70">
           Thank you, {name.split(" ")[0] || "friend"}! We&apos;ll call{" "}
           <strong>{phone}</strong> shortly to confirm{" "}
@@ -169,7 +169,7 @@ export default function CheckoutPage() {
         <div className="mt-6 flex flex-wrap justify-center gap-3">
           <Link
             href="/build"
-            className="shine min-h-[52px] rounded-full bg-gradient-to-br from-berry to-strawberry px-8 py-3 font-display text-lg font-black text-white transition hover:brightness-110 active:scale-95"
+            className="min-h-[52px] rounded-full bg-ember px-8 py-3 font-display text-lg font-black text-white transition hover:bg-ember-deep active:scale-95"
           >
             Build another
           </Link>
@@ -185,11 +185,11 @@ export default function CheckoutPage() {
   }
 
   const inputCls =
-    "min-h-[52px] w-full rounded-2xl border-2 border-choco/15 bg-milk px-4 font-semibold placeholder:font-medium placeholder:text-choco/70 focus:border-berry";
+    "min-h-[52px] w-full rounded-2xl border-2 border-choco/15 bg-milk px-4 font-semibold placeholder:font-medium placeholder:text-choco/70 focus:border-ember-deep";
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-10 sm:px-6">
-      <p className="text-label uppercase text-berry">The last step</p>
+      <p className="text-label uppercase text-ember">The last step</p>
       <h1 className="mt-1 font-display text-display">Let&apos;s get it to you</h1>
       <p className="mt-2 max-w-lg text-choco/70">
         Tell us where it&apos;s going and when. We&apos;ll call to confirm the
@@ -198,7 +198,7 @@ export default function CheckoutPage() {
 
       <div className="mt-6 grid items-start gap-5 md:grid-cols-[minmax(0,6fr)_minmax(0,5fr)]">
         <form
-          className="flex flex-col gap-4 rounded-3xl bg-milk p-5 shadow-[0_2px_16px_rgba(62,42,32,0.07)] sm:p-6"
+          className="flex flex-col gap-4 rounded-3xl bg-milk p-5 shadow-[0_2px_16px_rgba(43,28,21,0.07)] sm:p-6"
           // noValidate: the `required` attributes below are still exposed to
           // assistive tech, but the browser's native bubble is suppressed so the
           // styled, field-linked `co-error` message is what actually gets shown.
@@ -263,7 +263,7 @@ export default function CheckoutPage() {
                   onClick={() => setMode(m)}
                   className={cn(
                     "min-h-[52px] rounded-2xl border-2 text-sm font-bold capitalize transition active:scale-[0.98]",
-                    mode === m ? "border-berry bg-blush" : "border-choco/15 hover:border-choco/40"
+                    mode === m ? "border-ember bg-ember/10" : "border-choco/15 hover:border-choco/40"
                   )}
                 >
                   <span aria-hidden className="mr-1.5">{i === 0 ? "🛵" : "🏪"}</span>
@@ -322,7 +322,7 @@ export default function CheckoutPage() {
               ref={errorRef}
               tabIndex={-1}
               role="alert"
-              className="rounded-2xl bg-blush px-4 py-3 text-sm font-bold text-berry"
+              className="rounded-2xl bg-ember/10 px-4 py-3 text-sm font-bold text-ember-deep ring-1 ring-inset ring-ember/30"
             >
               {error}
             </p>
@@ -330,7 +330,7 @@ export default function CheckoutPage() {
 
           <button
             type="submit"
-            className="shine min-h-[56px] rounded-full bg-gradient-to-br from-berry to-strawberry font-display text-lg font-black text-white shadow-[0_8px_24px_rgba(109,33,72,0.45)] transition hover:brightness-110 active:scale-95"
+            className="min-h-[56px] rounded-full bg-ember font-display text-lg font-black text-white transition hover:bg-ember-deep active:scale-95"
           >
             Place order · {ngn(subtotal)}
           </button>

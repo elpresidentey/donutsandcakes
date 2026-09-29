@@ -17,20 +17,20 @@ export function LogoMark({ className }: { className?: string }) {
   return (
     <svg viewBox="0 0 48 48" className={className} aria-hidden="true">
       <circle cx="24" cy="26" r="16" fill="#f7c873" />
-      <circle cx="24" cy="26" r="16" fill="none" stroke="#3e2a20" strokeWidth="2.5" />
+      <circle cx="24" cy="26" r="16" fill="none" stroke="#2b1c15" strokeWidth="2.5" />
       <path
         d="M12 22c2-7 8-10 12-10s10 3 12 10v6c-1.5 1.3-3.3 2-5 2-3.5 0-3.5-3-7-3s-3.5 3-7 3c-1.7 0-3.5-.7-5-2z"
-        fill="#b04a76"
-        stroke="#3e2a20"
+        fill="#c2410c"
+        stroke="#2b1c15"
         strokeWidth="2.5"
         strokeLinejoin="round"
       />
-      <circle cx="24" cy="26" r="5.5" fill="#fff9f1" stroke="#3e2a20" strokeWidth="2.5" />
+      <circle cx="24" cy="26" r="5.5" fill="#f7f2e8" stroke="#2b1c15" strokeWidth="2.5" />
       <circle cx="17" cy="20" r="1.6" fill="#fff" />
       <circle cx="31" cy="18" r="1.6" fill="#ffe1a8" />
-      <circle cx="33" cy="27" r="1.6" fill="#c9e7ff" />
+      <circle cx="33" cy="27" r="1.6" fill="#e9a100" />
       <circle cx="20" cy="32" r="1.6" fill="#bfebce" />
-      <circle cx="27" cy="33" r="1.6" fill="#dcd2ff" />
+      <circle cx="27" cy="33" r="1.6" fill="#c2410c" />
     </svg>
   );
 }
@@ -97,18 +97,18 @@ export default function SiteHeader() {
         {/* Reading-progress hairline, driven by transform only */}
         <div
           aria-hidden
-          className="absolute inset-x-0 bottom-0 h-[2px] origin-left bg-strawberry/70"
+          className="absolute inset-x-0 bottom-0 h-[2px] origin-left bg-ember/25"
         >
           <div
             ref={progressRef}
-            className="h-full w-full origin-left scale-x-0 bg-strawberry"
+            className="h-full w-full origin-left scale-x-0 bg-ember"
           />
         </div>
         <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6">
           <Link href="/" className="flex min-h-[44px] items-center gap-2" aria-label="Donuts and Cakes — home">
             <LogoMark className="h-9 w-9 animate-wiggle" />
             <span className="font-display text-xl font-black tracking-tight">
-              Donuts<span className="text-berry">&</span>Cakes
+              Donuts<span className="text-ember">&</span>Cakes
             </span>
           </Link>
 
@@ -126,7 +126,7 @@ export default function SiteHeader() {
                   aria-current={current ? "page" : undefined}
                   className={cn(
                     "flex min-h-[44px] items-center rounded-full px-4 text-[15px] font-bold transition",
-                    current ? "bg-choco text-cream" : "text-choco hover:bg-blush"
+                    current ? "bg-choco text-cream" : "text-choco hover:bg-sand"
                   )}
                 >
                   {l.label}
@@ -154,7 +154,7 @@ export default function SiteHeader() {
               <span
                 key={count}
                 aria-hidden="true"
-                className="absolute -right-1 -top-1 flex h-6 min-w-6 animate-pop items-center justify-center rounded-full bg-gradient-to-br from-berry to-strawberry px-1.5 text-xs font-black text-white"
+                className="absolute -right-1 -top-1 flex h-6 min-w-6 animate-pop items-center justify-center rounded-full bg-ember px-1.5 text-xs font-black text-white"
               >
                 {count}
               </span>

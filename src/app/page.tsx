@@ -29,21 +29,18 @@ const BUILDERS = [
     title: "Cake Builder",
     text: "Shape, size, sponge, filling, frosting, toppings — and the exact words you want piped on top.",
     image: IMAGES.vanillaParty,
-    bg: "bg-blush",
   },
   {
     href: "/build/donuts",
     title: "Donut Box Builder",
     text: "Choose the box, fill every slot with a different mood, then glaze and top the whole thing.",
     image: IMAGES.glazedBox,
-    bg: "bg-lilac",
   },
   {
     href: "/build/smoothie",
     title: "Smoothie Builder",
     text: "Pick your base, drop in real fruit, add extras — and watch the colour blend as you go.",
     image: IMAGES.strawberryFields,
-    bg: "bg-mint",
   },
 ];
 
@@ -77,7 +74,7 @@ export default function HomePage() {
         <div className="flex w-max animate-marquee gap-8 whitespace-nowrap">
           {[...MARQUEE, ...MARQUEE].map((m, i) => (
             <span key={i} className="flex items-center gap-8 font-display text-sm font-bold uppercase tracking-[0.2em] text-cream">
-              {m} <span className="text-berry">✦</span>
+              {m} <span className="text-honey">✦</span>
             </span>
           ))}
         </div>
@@ -95,14 +92,14 @@ export default function HomePage() {
         />
         <div className="grid gap-4 sm:grid-cols-3">
           {[
-            { href: "/cakes", name: "Cakes", text: "Ready-made or built by you", image: IMAGES.chocoFudge, bg: "from-blush to-butter" },
-            { href: "/donuts", name: "Donuts", text: "Singles, and boxes for crowds", image: IMAGES.pinkParade, bg: "from-lilac to-blush" },
-            { href: "/smoothies", name: "Cold sips", text: "Smoothies and fresh juice", image: IMAGES.berryMedley, bg: "from-mint to-sky" },
+            { href: "/cakes", name: "Cakes", text: "Ready-made or built by you", image: IMAGES.chocoFudge, bg: "bg-sand" },
+            { href: "/donuts", name: "Donuts", text: "Singles, and boxes for crowds", image: IMAGES.pinkParade, bg: "bg-butter/40" },
+            { href: "/smoothies", name: "Cold sips", text: "Smoothies and fresh juice", image: IMAGES.berryMedley, bg: "bg-mint/60" },
           ].map((c, i) => (
             <Reveal key={c.href} delay={i * 90}>
               <Link
                 href={c.href}
-                className={`group relative block overflow-hidden rounded-3xl bg-gradient-to-br ${c.bg} p-2 transition-transform hover:-translate-y-1`}
+                className={`group relative block overflow-hidden rounded-3xl ${c.bg} p-2 ring-1 ring-inset ring-choco/10 transition-transform hover:-translate-y-1`}
               >
                 <div className="overflow-hidden rounded-[1.3rem]">
                   <FoodImage
@@ -120,7 +117,7 @@ export default function HomePage() {
                     </h3>
                     <p className="text-sm font-semibold text-choco/70">{c.text}</p>
                   </div>
-                  <span className="flex h-11 w-11 items-center justify-center rounded-full bg-choco text-xl text-cream transition group-hover:bg-strawberry" aria-hidden="true">
+                  <span className="flex h-11 w-11 items-center justify-center rounded-full bg-choco text-xl text-cream transition group-hover:bg-ember" aria-hidden="true">
                     →
                   </span>
                 </div>
@@ -151,17 +148,11 @@ export default function HomePage() {
 
       {/* Builders promo */}
       <Reveal as="section" className="mx-auto max-w-6xl px-4 py-14 sm:px-6" aria-labelledby="build-promo">
-        <div className="relative overflow-hidden rounded-[2rem] bg-cocoa p-6 text-cream sm:p-10">
-          {/* Ambient drifting glows. Kept low-opacity and blurred so the cream
-              copy above stays well clear of AA. */}
-          <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
-            <div className="blob absolute -left-24 -top-24 h-72 w-72 rounded-full bg-strawberry/25 blur-3xl" />
-            <div className="blob blob-slow absolute -bottom-28 -right-16 h-80 w-80 rounded-full bg-berry/30 blur-3xl" />
-          </div>
+        <div className="relative overflow-hidden rounded-[2rem] bg-cocoa p-6 text-cream ring-1 ring-inset ring-cream/10 sm:p-10">
           <div className="relative">
-          <p className="text-label uppercase text-rose">The signature experience</p>
+          <p className="text-label uppercase text-honey">The signature experience</p>
           <h2 id="build-promo" className="mt-2 max-w-xl font-display text-heading sm:text-display">
-            Don&apos;t just pick a dessert. <span className="text-rose">Design one.</span>
+            Don&apos;t just pick a dessert. <span className="text-ember">Design one.</span>
           </h2>
           <p className="mt-3 max-w-xl text-cream/75">
             Three studios, no rigid menus, no wrong answers. Try a flavour, watch
@@ -187,7 +178,7 @@ export default function HomePage() {
                 <div className="p-5">
                   <h3 className="font-display text-xl font-black">{b.title}</h3>
                   <p className="mt-1 text-sm text-choco/70">{b.text}</p>
-                  <span className="mt-3 inline-block rounded-full bg-gradient-to-br from-berry to-strawberry px-5 py-2 text-sm font-bold text-white transition group-hover:brightness-110">
+                  <span className="mt-3 inline-block rounded-full bg-ember px-5 py-2 text-sm font-bold text-white transition group-hover:bg-ember-deep">
                     Start creating →
                   </span>
                 </div>
@@ -199,7 +190,7 @@ export default function HomePage() {
       </Reveal>
 
       {/* Juices */}
-      <Reveal as="section" className="bg-gradient-to-b from-mint/50 to-cream py-12" aria-labelledby="juices">
+      <Reveal as="section" className="bg-mint/40 py-12" aria-labelledby="juices">
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
           <SectionHeading
             eyebrow="Pressed, never fizzy"
@@ -223,7 +214,7 @@ export default function HomePage() {
           {STEPS.map((s, i) => (
             <Reveal as="li" key={s.n} delay={i * 80}>
               <div className="h-full rounded-3xl border-2 border-choco/10 bg-milk p-5">
-                <p className="font-display text-display text-berry">{s.n}</p>
+                <p className="font-display text-display text-ember">{s.n}</p>
                 <h3 className="mt-2 font-display text-xl font-black">{s.title}</h3>
                 <p className="mt-1 text-sm leading-relaxed text-choco/70">{s.text}</p>
               </div>
@@ -234,15 +225,15 @@ export default function HomePage() {
       </Reveal>
 
       {/* Testimonials */}
-      <Reveal as="section" className="bg-blush/60 py-12" aria-labelledby="love">
+      <Reveal as="section" className="bg-sand/60 py-12" aria-labelledby="love">
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
           <SectionHeading eyebrow="Sweet words" title="What Lagos is saying about us" />
           <h2 id="love" className="sr-only">Customer reviews</h2>
           <div className="grid gap-4 md:grid-cols-3">
             {QUOTES.map((t, i) => (
               <Reveal key={t.name} delay={i * 90}>
-                <figure className="h-full rounded-3xl bg-milk p-6 shadow-[0_2px_16px_rgba(62,42,32,0.07)]">
-                  <div className="text-berry" aria-label="5 out of 5 stars">★★★★★</div>
+                <figure className="h-full rounded-3xl bg-milk p-6 shadow-[0_2px_16px_rgba(43,28,21,0.07)]">
+                  <div className="text-ember" aria-label="5 out of 5 stars">★★★★★</div>
                   <blockquote className="mt-2 text-[15px] font-medium leading-relaxed">“{t.q}”</blockquote>
                   <figcaption className="mt-3 text-sm font-bold text-choco/70">{t.name}</figcaption>
                 </figure>
@@ -254,14 +245,7 @@ export default function HomePage() {
 
       {/* Final CTA */}
       <Reveal as="section" className="mx-auto max-w-6xl px-4 py-14 sm:px-6">
-        <div className="texture-dots relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-berry to-cocoa p-8 text-center text-white sm:p-14">
-          {/* Scrim. The berry base (#6d2148) clears 9.2:1 against white on its
-              own, so this wash is only there to keep the ramp even. */}
-          <div aria-hidden className="pointer-events-none absolute inset-0 bg-cocoa/20" />
-          <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
-            <div className="blob absolute -left-20 top-0 h-64 w-64 rounded-full bg-rose/25 blur-3xl" />
-            <div className="blob blob-slow absolute -bottom-24 -right-16 h-72 w-72 rounded-full bg-cocoa/40 blur-3xl" />
-          </div>
+        <div className="relative overflow-hidden rounded-[2rem] bg-cocoa p-8 text-center text-white ring-1 ring-inset ring-cream/10 sm:p-14">
           <div className="relative">
             <h2 className="mx-auto max-w-2xl font-display text-heading sm:text-display">
               The sweetest thing you&apos;ll do this week
@@ -273,7 +257,7 @@ export default function HomePage() {
             </p>
             <Link
               href="/build/cake"
-              className="shine mt-6 inline-block min-h-[52px] rounded-full bg-cream px-10 py-3.5 font-display text-lg font-black text-berry shadow-xl transition hover:bg-white active:scale-95"
+              className="mt-6 inline-block min-h-[52px] rounded-full bg-ember px-10 py-3.5 font-display text-lg font-black text-white transition hover:bg-ember-deep active:scale-95"
             >
               Start Your Cake
             </Link>

@@ -48,14 +48,14 @@ export default function SmoothiePreview({
       {/* backdrop blob */}
       <circle cx="150" cy="140" r="108" fill={lighten(liquid, 0.55)} opacity="0.6" />
       {/* straw */}
-      <rect x="178" y="18" width="16" height="120" rx="8" fill="#b04a76" stroke="#3e2a20" strokeWidth="3.5" transform="rotate(8 186 78)" />
+      <rect x="178" y="18" width="16" height="120" rx="8" fill="#c2410c" stroke="#2b1c15" strokeWidth="3.5" transform="rotate(8 186 78)" />
       <rect x="178" y="18" width="6" height="120" rx="3" fill="#ffffff" opacity="0.5" transform="rotate(8 186 78)" />
       {/* glass */}
       <path
         d={`M96 ${topY} L204 ${topY} L190 250 L110 250 Z`}
         fill="url(#smGlass)"
         opacity="0.9"
-        stroke="#3e2a20"
+        stroke="#2b1c15"
         strokeWidth="5"
         strokeLinejoin="round"
       />
@@ -63,7 +63,7 @@ export default function SmoothiePreview({
       <path
         d={`M101 ${topY + 14} L199 ${topY + 14} L188 244 L112 244 Z`}
         fill="url(#smLiquid)"
-        stroke="#3e2a20"
+        stroke="#2b1c15"
         strokeWidth="3"
         strokeLinejoin="round"
       />
@@ -80,7 +80,7 @@ export default function SmoothiePreview({
           height={17}
           rx={6}
           fill={swatchFor(f)}
-          stroke="#3e2a20"
+          stroke="#2b1c15"
           strokeWidth="2.5"
           transform={`rotate(${(i * 31) % 40 - 20} ${132 + i * 22} ${topY + 68 + ((i * 47) % 90)})`}
         />
@@ -88,26 +88,26 @@ export default function SmoothiePreview({
       {/* extras garnish */}
       {extras.includes("Mint") && (
         <g transform={`translate(150 ${topY - 12})`}>
-          <ellipse cx="-8" cy="0" rx="11" ry="6" fill="#1e7a46" stroke="#3e2a20" strokeWidth="2.5" transform="rotate(-24)" />
-          <ellipse cx="8" cy="-4" rx="11" ry="6" fill="#2fa35f" stroke="#3e2a20" strokeWidth="2.5" transform="rotate(18)" />
+          <ellipse cx="-8" cy="0" rx="11" ry="6" fill="#1e7a46" stroke="#2b1c15" strokeWidth="2.5" transform="rotate(-24)" />
+          <ellipse cx="8" cy="-4" rx="11" ry="6" fill="#2fa35f" stroke="#2b1c15" strokeWidth="2.5" transform="rotate(18)" />
         </g>
       )}
       {extras.includes("Chia seeds") &&
         Array.from({ length: 8 }).map((_, i) => (
-          <circle key={i} cx={120 + ((i * 37) % 62)} cy={topY + 30 + ((i * 53) % 130)} r={1.8} fill="#3e2a20" />
+          <circle key={i} cx={120 + ((i * 37) % 62)} cy={topY + 30 + ((i * 53) % 130)} r={1.8} fill="#2b1c15" />
         ))}
       {/* fruit on rim */}
       {fruits[0] && (
         <g transform={`translate(204 ${topY + 6}) rotate(18)`}>
-          <circle r="15" fill={swatchFor(fruits[0])} stroke="#3e2a20" strokeWidth="3" />
+          <circle r="15" fill={swatchFor(fruits[0])} stroke="#2b1c15" strokeWidth="3" />
           {[0, 60, 120, 180, 240, 300].map((a) => (
-            <circle key={a} cx={Math.cos((a * Math.PI) / 180) * 9} cy={Math.sin((a * Math.PI) / 180) * 9} r={2} fill="#3e2a20" opacity="0.55" />
+            <circle key={a} cx={Math.cos((a * Math.PI) / 180) * 9} cy={Math.sin((a * Math.PI) / 180) * 9} r={2} fill="#2b1c15" opacity="0.55" />
           ))}
         </g>
       )}
       {/* condensation — a cold glass sweats */}
-      <ellipse cx="150" cy="258" rx="50" ry="8" fill="#3e2a20" opacity="0.26" filter="url(#smSoft)" />
-      <ellipse cx="150" cy="254" rx="52" ry="9" fill="#3e2a20" opacity="0.14" />
+      <ellipse cx="150" cy="258" rx="50" ry="8" fill="#2b1c15" opacity="0.26" filter="url(#smSoft)" />
+      <ellipse cx="150" cy="254" rx="52" ry="9" fill="#2b1c15" opacity="0.14" />
     </svg>
   );
 }

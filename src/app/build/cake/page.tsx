@@ -169,7 +169,7 @@ function CakeBuilderForm() {
           maxLength={20}
           onChange={(e) => setInscription(e.target.value)}
           placeholder='e.g. Happy Birthday Ada!'
-          className="min-h-[52px] w-full rounded-2xl border-2 border-choco/15 bg-cream px-4 font-bold placeholder:font-medium placeholder:text-choco/70 focus:border-berry"
+          className="min-h-[52px] w-full rounded-2xl border-2 border-choco/15 bg-cream px-4 font-bold placeholder:font-medium placeholder:text-choco/70 focus:border-ember-deep"
         />
         {inscription.trim() && (
           <button

@@ -3,7 +3,7 @@ import Link from "next/link";
 export default function NotFound() {
   return (
     <div className="mx-auto max-w-2xl px-4 py-20 text-center sm:px-6">
-      <p className="font-display text-8xl font-black text-berry" aria-hidden="true">
+      <p className="font-display text-8xl font-black text-ember" aria-hidden="true">
         404
       </p>
       <h1 className="mt-2 font-display text-heading">
@@ -16,7 +16,7 @@ export default function NotFound() {
       <div className="mt-6 flex flex-wrap justify-center gap-3">
         <Link
           href="/"
-          className="shine min-h-[52px] rounded-full bg-gradient-to-br from-berry to-strawberry px-8 py-3 font-display text-lg font-black text-white transition hover:brightness-110 active:scale-95"
+          className="min-h-[52px] rounded-full bg-ember px-8 py-3 font-display text-lg font-black text-white transition hover:bg-ember-deep active:scale-95"
         >
           Take me home
         </Link>

@@ -117,7 +117,7 @@ function SmoothieBuilderForm() {
       <Step n="03" title="Fruits" hint="Pick 1–4 real fruits. This is where the colour comes from.">
         <MultiPicker label="Smoothie fruits" options={SMOOTHIE_FRUITS} values={fruits} onToggle={toggleFruit} max={4} />
         {fruits.length === 0 && (
-          <p role="alert" className="mt-2 text-sm font-bold text-berry">
+          <p role="alert" className="mt-2 text-sm font-bold text-ember-deep">
             Add at least one fruit to build your blend.
           </p>
         )}

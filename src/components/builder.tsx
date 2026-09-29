@@ -19,9 +19,9 @@ export function Step({
   children: ReactNode;
 }) {
   return (
-    <section aria-label={title} className="rounded-3xl bg-milk p-5 ring-1 ring-choco/8 shadow-[0_2px_14px_rgba(62,42,32,0.05)]">
+    <section aria-label={title} className="rounded-3xl bg-milk p-5 ring-1 ring-choco/8 shadow-[0_2px_14px_rgba(43,28,21,0.05)]">
       <div className="mb-3 flex items-baseline gap-2">
-        <span className="font-display text-sm font-black text-berry">{n}</span>
+        <span className="font-display text-sm font-black text-ember">{n}</span>
         <h2 className="font-display text-subhead">{title}</h2>
       </div>
       {hint && <p className="mb-3 -mt-1 text-sm text-choco/70">{hint}</p>}
@@ -120,14 +120,14 @@ export function SinglePicker({
             className={cn(
               "relative flex min-h-[68px] flex-col justify-center gap-1 rounded-2xl border-2 px-3.5 py-3 text-left transition-all duration-200 active:scale-[0.98]",
               active
-                ? "border-berry bg-blush shadow-[0_6px_18px_rgba(109,33,72,0.16)]"
-                : "border-choco/10 bg-cream hover:-translate-y-0.5 hover:border-choco/35 hover:shadow-[0_6px_16px_rgba(62,42,32,0.08)]"
+                ? "border-ember bg-ember/10"
+                : "border-choco/10 bg-cream hover:-translate-y-0.5 hover:border-choco/35 hover:shadow-[0_6px_16px_rgba(43,28,21,0.08)]"
             )}
           >
             {active && (
               <span
                 aria-hidden
-                className="absolute right-3 top-3 h-2.5 w-2.5 rounded-full bg-berry"
+                className="absolute right-3 top-3 h-2.5 w-2.5 rounded-full bg-ember"
               />
             )}
             <span className="flex items-center gap-2.5 pr-5 text-sm font-bold">
@@ -143,7 +143,7 @@ export function SinglePicker({
             <span
               className={cn(
                 "text-xs font-bold",
-                active ? "text-berry" : "text-choco/70"
+                active ? "text-ember-deep" : "text-choco/70"
               )}
             >
               {o.note ?? deltaLabel(o.delta)}
@@ -184,8 +184,8 @@ export function MultiPicker({
             className={cn(
               "inline-flex min-h-[46px] items-center gap-1.5 rounded-full border-2 px-4 py-2 text-sm font-bold transition-all duration-200 active:scale-95",
               active
-                ? "border-berry bg-berry text-cream shadow-[0_6px_16px_rgba(109,33,72,0.26)]"
-                : "border-choco/10 bg-cream hover:-translate-y-0.5 hover:border-berry/40 hover:shadow-[0_6px_16px_rgba(62,42,32,0.08)]",
+                ? "border-ember bg-ember text-cream"
+                : "border-choco/10 bg-cream hover:-translate-y-0.5 hover:border-ember/50 hover:shadow-[0_6px_16px_rgba(43,28,21,0.08)]",
               disabled && "cursor-not-allowed opacity-40 hover:translate-y-0 hover:border-choco/10 hover:shadow-none"
             )}
           >
@@ -195,7 +195,7 @@ export function MultiPicker({
               {active ? "✓" : "+"}
             </span>
             {o.label}
-            <span className={cn("text-xs font-bold", active ? "text-cream/75" : "text-choco/70")}>
+            <span className={cn("text-xs font-bold", active ? "text-cream" : "text-choco/70")}>
               {o.delta > 0 ? `+${ngn(o.delta)}` : o.delta < 0 ? `−${ngn(-o.delta)}` : "free"}
             </span>
             {active && <span className="sr-only">(selected)</span>}
@@ -236,14 +236,14 @@ export function BuilderLayout({
 }) {
   return (
     <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6">
-      <p className="text-label uppercase text-berry">{eyebrow}</p>
+      <p className="text-label uppercase text-ember">{eyebrow}</p>
       <h1 className="mt-1 font-display text-display">{title}</h1>
       <p className="mt-2 max-w-xl text-choco/70">{intro}</p>
 
       <div className="mt-6 grid items-start gap-5 lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)]">
         {/* Live preview */}
         <div className="lg:sticky lg:top-24">
-          <div className="overflow-hidden rounded-[2rem] border-4 border-milk bg-gradient-to-br from-blush via-cream to-mint shadow-[0_16px_48px_rgba(62,42,32,0.15)]">
+          <div className="overflow-hidden rounded-[2rem] border-4 border-milk bg-sand shadow-[0_16px_48px_rgba(43,28,21,0.12)]">
             <div className="px-5 pt-4">
               <p className="text-label uppercase text-choco/70">
                 Watching you build
@@ -262,7 +262,7 @@ export function BuilderLayout({
             <button
               type="button"
               onClick={onAdd}
-              className="shine min-h-[52px] rounded-full bg-gradient-to-br from-berry to-strawberry px-8 font-display text-lg font-black text-white shadow-lg transition hover:brightness-110 active:scale-95"
+              className="min-h-[52px] rounded-full bg-ember px-8 font-display text-lg font-black text-white transition hover:bg-ember-deep active:scale-95"
             >
               {cta}
             </button>
@@ -280,7 +280,7 @@ export function BuilderLayout({
           <button
             type="button"
             onClick={onAdd}
-            className="shine min-h-[52px] rounded-full bg-gradient-to-br from-berry to-strawberry px-7 font-display text-base font-black text-white transition hover:brightness-110 active:scale-95"
+            className="min-h-[52px] rounded-full bg-ember px-7 font-display text-base font-black text-white transition hover:bg-ember-deep active:scale-95"
           >
             {cta}
           </button>

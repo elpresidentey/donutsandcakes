@@ -14,7 +14,7 @@ export interface CakePreviewProps {
   gold?: boolean;
 }
 
-const INK = "#3e2a20";
+const INK = "#2b1c15";
 const SPRINKLE_COLORS = ["#b04a76", "#6c4fc4", "#1d6fb8", "#1e7a46", "#e9a100", "#ff8a4c"];
 
 const SIZE_SCALE: Record<string, number> = {
@@ -241,7 +241,7 @@ export default function CakePreview({
       {/* board */}
       <circle cx={CX} cy={CY + 9} r={146} fill={INK} opacity="0.11" filter="url(#ckSoft)" />
       <circle cx={CX} cy={CY} r={146} fill="#ffffff" stroke={INK} strokeWidth="4.5" />
-      <circle cx={CX} cy={CY} r={134} fill="#f9e8ef" />
+      <circle cx={CX} cy={CY} r={134} fill="#f7f2e8" />
       {/* the cake sits on the board, so it needs a real contact shadow */}
       <ellipse
         cx={CX}
@@ -313,11 +313,14 @@ export default function CakePreview({
           x={CX}
           y={CY + 8}
           textAnchor="middle"
-          fontFamily="Fraunces, Georgia, serif"
+          /* Inline style, not a `fontFamily` presentation attribute: var()
+             substitution in SVG presentation attributes is not reliably
+             supported, and the family name is now next/font's hashed one. */
+          style={{ fontFamily: "var(--font-display)" }}
           fontWeight={900}
           fontSize={text.length > 13 ? 20 : text.length > 9 ? 24 : 27}
-          fill={gold ? "#b8860b" : "#6d2148"}
-          stroke={gold ? "#fff3c4" : "#fff9f1"}
+          fill={gold ? "#b8860b" : "#4a2a1a"}
+          stroke={gold ? "#fff3c4" : "#fffdfa"}
           strokeWidth="3"
           paintOrder="stroke"
         >

@@ -41,7 +41,7 @@ function Tile({
       onClick={onOpen}
       aria-label={`View ${product.name} larger`}
       className={cn(
-        "group relative block w-full overflow-hidden rounded-3xl bg-milk text-left ring-1 ring-choco/8 shadow-[0_2px_10px_rgba(62,42,32,0.05)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_38px_rgba(62,42,32,0.16)] focus-visible:outline-berry",
+        "group relative block w-full overflow-hidden rounded-3xl bg-milk text-left ring-1 ring-choco/8 shadow-[0_2px_10px_rgba(43,28,21,0.05)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_38px_rgba(43,28,21,0.16)] focus-visible:outline-ember",
         span
       )}
     >
@@ -54,16 +54,12 @@ function Tile({
           className="h-full w-full object-cover transition-transform duration-[600ms] ease-out group-hover:scale-[1.06]"
         />
       </span>
-      <span
-        aria-hidden
-        className="pointer-events-none absolute inset-0 bg-gradient-to-t from-cocoa/70 via-cocoa/10 to-transparent opacity-90 transition-opacity group-hover:opacity-100"
-      />
       {product.badge && (
-        <span className="absolute left-3 top-3 rounded-full bg-milk/92 px-3 py-1 text-label uppercase text-berry shadow backdrop-blur">
+        <span className="absolute left-3 top-3 rounded-full bg-milk/92 px-3 py-1 text-label uppercase text-ember shadow backdrop-blur">
           {product.badge}
         </span>
       )}
-      <span className="absolute inset-x-0 bottom-0 block p-4">
+      <span className="absolute inset-x-0 bottom-0 block bg-cocoa/75 p-4 backdrop-blur-[2px]">
         <span className="block font-display text-subhead text-cream">
           {product.name}
         </span>
@@ -72,7 +68,7 @@ function Tile({
             {ngn(product.price)}
             {product.serves ? ` · ${product.serves}` : ""}
           </span>
-          <span className="rounded-full bg-cream/20 px-3 py-1 text-xs font-black uppercase tracking-wide text-cream backdrop-blur transition group-hover:bg-cream group-hover:text-berry">
+          <span className="rounded-full bg-cream/20 px-3 py-1 text-xs font-black uppercase tracking-wide text-cream backdrop-blur transition group-hover:bg-cream group-hover:text-ember-deep">
             View
           </span>
         </span>
@@ -135,8 +131,8 @@ export default function CakeGallery() {
               className={cn(
                 "min-h-[46px] rounded-full border-2 px-5 py-2 text-sm font-bold transition-all duration-200 active:scale-95",
                 selected
-                  ? "border-berry bg-berry text-cream shadow-[0_6px_16px_rgba(109,33,72,0.26)]"
-                  : "border-choco/10 bg-milk hover:-translate-y-0.5 hover:border-berry/40 hover:shadow-[0_6px_16px_rgba(62,42,32,0.08)]"
+                  ? "border-ember bg-ember text-cream"
+                  : "border-choco/10 bg-milk hover:-translate-y-0.5 hover:border-ember/50 hover:shadow-[0_6px_16px_rgba(43,28,21,0.08)]"
               )}
             >
               {f.label} · {n}
@@ -155,11 +151,10 @@ export default function CakeGallery() {
         {/* Always-on-tile: anything not on the shelf, we build to order. */}
         <Link
           href="/build/cake"
-          className="group relative flex min-h-[220px] flex-col justify-end overflow-hidden rounded-3xl bg-gradient-to-br from-berry to-cocoa p-5 text-left text-white ring-1 ring-choco/10 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_38px_rgba(62,42,32,0.25)]"
+          className="group relative flex min-h-[220px] flex-col justify-end overflow-hidden rounded-3xl bg-cocoa p-5 text-left text-white ring-1 ring-inset ring-cream/10 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_38px_rgba(43,28,21,0.25)]"
         >
-          <span aria-hidden className="pointer-events-none absolute inset-0 texture-dots-light opacity-60" />
           <span className="relative">
-            <span className="text-label uppercase text-butter">
+            <span className="text-label uppercase text-honey">
               Not on the shelf?
             </span>
             <span className="mt-1 block font-display text-heading">
@@ -168,7 +163,7 @@ export default function CakeGallery() {
             <span className="mt-1 block text-sm text-white/85">
               Shape, flavour, filling & your words on top.
             </span>
-            <span className="mt-4 inline-block rounded-full bg-cream px-6 py-2.5 text-sm font-black text-berry transition group-hover:bg-white">
+            <span className="mt-4 inline-block rounded-full bg-ember px-6 py-2.5 text-sm font-black text-white transition group-hover:bg-ember-deep">
               Build a custom cake →
             </span>
           </span>
@@ -193,7 +188,7 @@ export default function CakeGallery() {
             tabIndex={-1}
             className="relative w-full max-w-2xl animate-pop overflow-hidden rounded-[1.75rem] bg-milk shadow-2xl outline-none"
           >
-            <div className="relative aspect-[16/10] w-full overflow-hidden bg-blush">
+            <div className="relative aspect-[16/10] w-full overflow-hidden bg-sand">
               <FoodImage
                 id={active.image.id}
                 alt={active.image.alt}
@@ -202,7 +197,7 @@ export default function CakeGallery() {
                 className="h-full w-full object-cover"
               />
               {active.badge && (
-                <span className="absolute left-4 top-4 rounded-full bg-milk/92 px-3 py-1 text-label uppercase text-berry shadow backdrop-blur">
+                <span className="absolute left-4 top-4 rounded-full bg-milk/92 px-3 py-1 text-label uppercase text-ember shadow backdrop-blur">
                   {active.badge}
                 </span>
               )}
@@ -223,7 +218,7 @@ export default function CakeGallery() {
                   </h2>
                   <p className="mt-1 text-sm font-semibold text-choco/70">{active.tagline}</p>
                 </div>
-                <p className="font-display text-2xl font-black text-berry">{ngn(active.price)}</p>
+                <p className="font-display text-2xl font-black text-ember-deep">{ngn(active.price)}</p>
               </div>
               <p className="mt-3 text-[15px] leading-relaxed text-choco/80">{active.description}</p>
               <p className="mt-3 text-sm font-bold text-choco/70">
@@ -253,7 +248,7 @@ export default function CakeGallery() {
                 </span>
                 <Link
                   href={`/product/${active.id}`}
-                  className="shine ml-auto inline-flex min-h-[52px] items-center rounded-full bg-gradient-to-br from-berry to-strawberry px-8 font-display text-lg font-black text-white shadow-[0_6px_16px_rgba(109,33,72,0.28)] transition hover:brightness-110 active:scale-95"
+                  className="ml-auto inline-flex min-h-[52px] items-center rounded-full bg-ember px-8 font-display text-lg font-black text-white transition hover:bg-ember-deep active:scale-95"
                 >
                   View treat →
                 </Link>

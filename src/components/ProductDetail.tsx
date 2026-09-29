@@ -32,12 +32,12 @@ export default function ProductDetail({ product }: { product: Product }) {
   return (
     <>
       <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6">
-        <Link href={`/${product.category}`} className="text-sm font-bold text-berry hover:underline">
+        <Link href={`/${product.category}`} className="text-sm font-bold text-ember-deep hover:underline">
           ← Back to {product.category}
         </Link>
 
         <div className="mt-4 grid gap-8 md:grid-cols-2">
-          <div className="overflow-hidden rounded-[2rem] border-4 border-milk shadow-[0_16px_48px_rgba(62,42,32,0.15)]">
+          <div className="overflow-hidden rounded-[2rem] border-4 border-milk shadow-[0_16px_48px_rgba(43,28,21,0.12)]">
             <FoodImage
               id={product.image.id}
               alt={product.image.alt}
@@ -72,7 +72,7 @@ export default function ProductDetail({ product }: { product: Product }) {
                 {product.ingredients.map((ing) => (
                   <li
                     key={ing}
-                    className="rounded-full bg-blush px-3 py-1 text-xs font-bold text-berry"
+                    className="rounded-full bg-sand px-3 py-1 text-xs font-bold text-choco/80"
                   >
                     {ing}
                   </li>
@@ -80,7 +80,7 @@ export default function ProductDetail({ product }: { product: Product }) {
               </ul>
             </div>
 
-            <p className="mt-5 font-display text-display text-berry">
+            <p className="mt-5 font-display text-display text-ember-deep">
               {ngn(unitPrice)}
               {product.compareAt && (
                 <span className="ml-3 align-middle font-sans text-base font-semibold text-choco/70 line-through">
@@ -105,7 +105,7 @@ export default function ProductDetail({ product }: { product: Product }) {
                         aria-pressed={active}
                         className={`min-h-[52px] rounded-2xl border-2 px-4 py-3 text-left text-sm font-bold transition active:scale-[0.98] ${
                           active
-                            ? "border-berry bg-blush"
+                            ? "border-ember bg-ember/10"
                             : "border-choco/15 bg-milk hover:border-choco/40"
                         }`}
                       >
@@ -125,7 +125,7 @@ export default function ProductDetail({ product }: { product: Product }) {
                 <button
                   type="button"
                   onClick={() => setQty((q) => Math.max(1, q - 1))}
-                  className="flex h-12 w-12 items-center justify-center text-2xl font-black hover:text-berry"
+                  className="flex h-12 w-12 items-center justify-center text-2xl font-black hover:text-ember"
                   aria-label="Decrease quantity"
                 >
                   −
@@ -134,7 +134,7 @@ export default function ProductDetail({ product }: { product: Product }) {
                 <button
                   type="button"
                   onClick={() => setQty((q) => Math.min(24, q + 1))}
-                  className="flex h-12 w-12 items-center justify-center text-2xl font-black hover:text-berry"
+                  className="flex h-12 w-12 items-center justify-center text-2xl font-black hover:text-ember"
                   aria-label="Increase quantity"
                 >
                   +
@@ -154,14 +154,14 @@ export default function ProductDetail({ product }: { product: Product }) {
                   });
                   router.push("/cart");
                 }}
-                className="shine min-h-[52px] flex-1 rounded-full bg-gradient-to-br from-berry to-strawberry font-display text-lg font-black text-white shadow-[0_8px_24px_rgba(109,33,72,0.45)] transition hover:brightness-110 active:scale-95"
+                className="min-h-[52px] flex-1 rounded-full bg-ember font-display text-lg font-black text-white transition hover:bg-ember-deep active:scale-95"
               >
                 Add to Cart · {ngn(unitPrice * qty)}
               </button>
             </div>
 
             <dl className="mt-6 grid grid-cols-3 gap-2 text-center text-xs font-bold text-choco/70">
-              <div className="rounded-2xl bg-blush/60 p-3">🚚<dt className="sr-only">Delivery</dt><dd className="mt-1">Lagos delivery Tue–Sun</dd></div>
+              <div className="rounded-2xl bg-sand p-3">🚚<dt className="sr-only">Delivery</dt><dd className="mt-1">Lagos delivery Tue–Sun</dd></div>
               <div className="rounded-2xl bg-mint/60 p-3">🌱<dt className="sr-only">Fresh</dt><dd className="mt-1">Baked & blended fresh</dd></div>
               <div className="rounded-2xl bg-butter/60 p-3">🎁<dt className="sr-only">Gifting</dt><dd className="mt-1">Gift wrap available</dd></div>
             </dl>

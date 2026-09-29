@@ -28,7 +28,8 @@ export default function SmoothiesPage() {
             sizes="100vw"
             className="h-full w-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-cocoa/85 via-cocoa/40 to-cocoa/10" />
+          {/* Flat ink wash — solid, not a gradient, so the photo stays legible. */}
+          <div className="absolute inset-0 bg-cocoa/70" />
         </div>
         <div className="relative mx-auto max-w-6xl px-4 pb-10 pt-20 sm:px-6 sm:pt-28">
           <p className="text-label uppercase text-butter">
@@ -47,7 +48,7 @@ export default function SmoothiesPage() {
       <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6">
         <Link
           href="/build/smoothie"
-          className="group mb-10 flex flex-col items-start gap-4 overflow-hidden rounded-3xl bg-gradient-to-r from-leaf to-ocean p-6 text-white sm:flex-row sm:items-center sm:p-8"
+          className="group mb-10 flex flex-col items-start gap-4 overflow-hidden rounded-3xl bg-leaf p-6 text-white ring-1 ring-inset ring-cream/15 sm:flex-row sm:items-center sm:p-8"
         >
           <div className="flex-1">
             <p className="text-label uppercase text-mint">Or blend your own</p>

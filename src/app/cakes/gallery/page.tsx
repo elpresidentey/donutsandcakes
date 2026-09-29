@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 export default function CakeGalleryPage() {
   return (
     <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6">
-      <p className="text-label uppercase text-berry">
+      <p className="text-label uppercase text-ember">
         Fresh from the oven
       </p>
       <h1 className="mt-1 font-display text-display">

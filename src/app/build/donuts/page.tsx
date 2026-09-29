@@ -150,7 +150,7 @@ function DonutBuilderForm() {
                 title={`Slot ${i + 1}: ${f}`}
                 className={cn(
                   "flex aspect-square min-h-[52px] flex-col items-center justify-center rounded-2xl border-2 transition active:scale-95",
-                  i === active ? "border-berry shadow-[0_4px_14px_rgba(109,33,72,0.3)]" : "border-choco/15 hover:border-choco/40"
+                  i === active ? "border-ember shadow-[0_4px_14px_rgba(143,44,7,0.3)]" : "border-choco/15 hover:border-choco/40"
                 )}
                 style={{ background: swatch }}
               >
@@ -165,7 +165,7 @@ function DonutBuilderForm() {
               key={f.value}
               type="button"
               onClick={() => assignFlavour(f.value)}
-              className="flex min-h-[52px] items-center gap-2 rounded-2xl border-2 border-choco/15 bg-cream px-3 text-left text-sm font-bold transition hover:border-berry active:scale-[0.98]"
+              className="flex min-h-[52px] items-center gap-2 rounded-2xl border-2 border-choco/15 bg-cream px-3 text-left text-sm font-bold transition hover:border-ember/50 active:scale-[0.98]"
             >
               <span aria-hidden className="h-6 w-6 shrink-0 rounded-full border border-choco/20" style={{ background: f.swatch }} />
               <span>

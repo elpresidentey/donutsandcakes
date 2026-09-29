@@ -17,7 +17,7 @@ interface FoodImageProps {
 
 /**
  * Remote food photo with a guaranteed-graceful fallback:
- * if the image fails to load, a pastel tile with the dish initial renders
+ * if the image fails to load, a warm tile with the dish initial renders
  * instead of a broken image icon.
  */
 export default function FoodImage({
@@ -37,13 +37,13 @@ export default function FoodImage({
         role="img"
         aria-label={alt}
         className={cn(
-          "flex items-center justify-center bg-gradient-to-br from-blush via-butter to-mint",
+          "flex items-center justify-center bg-sand",
           className
         )}
       >
         <span
           aria-hidden
-          className="font-display text-6xl font-black text-berry/40"
+          className="font-display text-6xl font-black text-choco/25"
         >
           {alt.charAt(0).toUpperCase()}
         </span>

@@ -48,8 +48,9 @@ export default function HeroSection() {
   }, [paused, reduced]);
 
   /* --------------------------- scroll parallax --------------------------- */
-  // Photo drifts slower than the page; copy drifts the other way. Both are
-  // transform-only, so they stay on the compositor and never trigger layout.
+  // The whole landscape drifts slower than the page; the copy drifts the other
+  // way. Both are transform-only, so they stay on the compositor and never
+  // trigger layout.
   const sectionRef = useRef<HTMLElement | null>(null);
   const [offset, setOffset] = useState(0);
 
@@ -87,11 +88,13 @@ export default function HeroSection() {
   const copyShift = reduced ? 0 : offset * -26; // px, subtle counter-drift
 
   return (
+    // Header is h-16 (4rem) and sticky in-flow, so the hero fills whatever is
+    // left of the first screen: header + hero = exactly one viewport.
     <section
       ref={sectionRef}
       aria-roledescription="carousel"
       aria-label="Featured collections"
-      className="relative isolate flex h-screen items-center overflow-hidden bg-cocoa"
+      className="relative isolate flex min-h-[calc(100svh-4rem)] flex-col overflow-hidden bg-cocoa text-cream"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       onFocusCapture={() => setPaused(true)}
@@ -111,113 +114,122 @@ export default function HeroSection() {
         {slide.titleB}.
       </p>
 
-      {/* ------------------------------ photography ---------------------------- */}
-      <div
-        className="absolute inset-x-0 -top-[80px] -bottom-[80px] -z-10 will-change-transform"
-        style={{
-          transform: `translate3d(0, ${photoShift}px, 0)`,
-          transition: reduced ? "none" : "transform 120ms linear",
-        }}
-        aria-hidden="true"
-      >
-        {HERO_SLIDES.map((s, i) => (
-          <div
-            key={s.image.id}
-            className={cn(
-              "absolute inset-0 transition-opacity duration-1000 ease-out motion-reduce:transition-none",
-              i === index ? "opacity-100" : "opacity-0"
-            )}
-          >
-            <Image
-              src={px(s.image.id, 1920)}
-              alt=""
-              fill
-              priority={i === 0}
-              sizes="100vw"
-              className={cn(
-                "object-cover",
-                !reduced && i === index && "animate-ken-burns motion-reduce:animate-none"
-              )}
-            />
-          </div>
-        ))}
-      </div>
-
-      {/* -------------------------------- scrim --------------------------------
-          Lighter than a flat wash: the photo stays vivid on the right, and
-          contrast is concentrated only where the copy actually sits. */}
-      <div className="pointer-events-none absolute inset-0 -z-10" aria-hidden="true">
-        <div className="absolute inset-0 bg-gradient-to-r from-cocoa via-cocoa/70 to-cocoa/25 lg:via-cocoa/45" />
-        <div className="absolute inset-0 bg-gradient-to-t from-cocoa/85 via-transparent to-cocoa/35 sm:from-cocoa/60" />
-      </div>
-
-      {/* ------------------------------- content ------------------------------- */}
-      <div
-        id="hero-slide-panel"
-        role="tabpanel"
-        aria-label={slide.eyebrow}
-        tabIndex={0}
-        className="relative mx-auto w-full max-w-6xl px-5 py-24 sm:px-8 sm:py-28 lg:py-32"
-        style={{
-          transform: `translate3d(0, ${copyShift}px, 0)`,
-          transition: reduced ? "none" : "transform 120ms linear",
-        }}
-      >
+      {/* Landscape photo stack, full-bleed behind everything. Every shot is a
+          moody 3:2 frame composed with its dark third on the left, so the
+          left-aligned copy always lands on shadow. */}
+      <div className="absolute inset-0" aria-hidden="true">
         <div
-          key={index}
-          className="flex max-w-4xl flex-col items-start animate-fade-up motion-reduce:animate-none"
+          className="absolute inset-x-0 -top-[70px] -bottom-[70px] will-change-transform"
+          style={{
+            transform: `translate3d(0, ${photoShift}px, 0)`,
+            transition: reduced ? "none" : "transform 120ms linear",
+          }}
         >
-          {/* Eyebrow + oversized slide index: editorial flourish, still quiet */}
-          <div className="flex items-center gap-4">
-            <span className="inline-flex items-center gap-2.5 text-[11px] font-black uppercase tracking-[0.22em] text-cream/85">
-              <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-strawberry" />
-              {slide.eyebrow}
-            </span>
-            <span
-              aria-hidden
-              className="font-display text-5xl font-black leading-none text-cream/20"
+          {HERO_SLIDES.map((s, i) => (
+            <div
+              key={s.image.id}
+              className={cn(
+                "absolute inset-0 transition-opacity duration-1000 ease-out motion-reduce:transition-none",
+                i === index ? "opacity-100" : "opacity-0"
+              )}
+              // Flat tint shows for the instant before the photo paints.
+              style={{ backgroundColor: s.bg }}
             >
-              0{index + 1}
-            </span>
-          </div>
+              <Image
+                src={px(s.image.id, 1920)}
+                alt=""
+                fill
+                priority={i === 0}
+                sizes="100vw"
+                className={cn(
+                  "object-cover",
+                  !reduced && i === index && "animate-ken-burns motion-reduce:animate-none"
+                )}
+              />
+            </div>
+          ))}
+        </div>
+        {/* Flat ink wash — one solid colour, never a gradient. The landscape
+            stays visible underneath while the copy keeps its contrast. */}
+        <div className="absolute inset-0 bg-cocoa/70" />
+      </div>
 
-          {/* Level 1 — exactly two lines, scaled to always fit the viewport */}
-          <h1 className="mt-4 font-display text-[clamp(2rem,7.5vw,4.75rem)] font-black leading-[0.95] tracking-[-0.02em] text-white">
-            <span className="block whitespace-nowrap">{slide.titleA}</span>
-            <span className="block whitespace-nowrap text-strawberry">{slide.titleB}</span>
-          </h1>
-
-          <p className="mt-7 max-w-xl text-lg font-medium leading-relaxed text-cream/80 sm:text-xl">
-            {slide.text}
-          </p>
-
-          <div className="mt-10 flex flex-col items-start gap-5 sm:flex-row sm:items-center sm:gap-7">
-            <Link
-              href={slide.href}
-              className="shine min-h-[60px] rounded-full bg-gradient-to-br from-berry to-strawberry px-11 py-4 font-display text-xl font-black text-white shadow-[0_10px_30px_rgba(249,79,126,0.5)] transition hover:-translate-y-0.5 hover:brightness-110 hover:shadow-[0_16px_40px_rgba(249,79,126,0.6)] active:scale-95"
-            >
-              {slide.cta}
-            </Link>
-            <span className="text-sm font-bold text-cream/90">{slide.chip}</span>
-          </div>
-
-          <Link
-            href="/shop"
-            className="mt-7 inline-flex min-h-[44px] items-center text-sm font-bold text-cream/85 underline-offset-4 transition hover:text-cream hover:underline"
+      {/* Copy and controls ride on top of the landscape. Horizontal padding
+          matches the header (px-4 sm:px-6) so the headline lines up with the
+          logo. Bottom padding clears the fixed MobileNav (64px + safe area)
+          below md, and the copy block's own `my-auto` centres it in whatever
+          space the pinned controls row leaves over. */}
+      <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-1 flex-col px-4 pb-[calc(5rem_+_env(safe-area-inset-bottom))] pt-6 sm:px-6 md:pb-12 lg:pb-14 lg:pt-10">
+        {/* ------------------------------- content ------------------------------- */}
+        <div
+          id="hero-slide-panel"
+          role="tabpanel"
+          aria-label={slide.eyebrow}
+          tabIndex={0}
+          className="my-auto max-w-2xl"
+          style={{
+            transform: `translate3d(0, ${copyShift}px, 0)`,
+            transition: reduced ? "none" : "transform 120ms linear",
+          }}
+        >
+          <div
+            key={index}
+            className="animate-fade-up motion-reduce:animate-none"
           >
-            Not ready to build? Browse what&apos;s already on the counter
-            <span aria-hidden> →</span>
-          </Link>
+            {/* Eyebrow + oversized slide index: editorial flourish, still quiet */}
+            <div className="flex items-center gap-4">
+              <span className="inline-flex items-center gap-2.5 text-[11px] font-black uppercase tracking-[0.22em] text-cream/85">
+                <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-ember" />
+                {slide.eyebrow}
+              </span>
+              <span
+                aria-hidden
+                className="text-outline-light font-display text-4xl font-black leading-none sm:text-5xl"
+              >
+                0{index + 1}
+              </span>
+            </div>
+
+            {/* Level 1 — exactly two lines, scaled to always fit the viewport.
+                Honey, not ember: over photography the ember accent drops below
+                3:1 even at this size, and honey is the system's on-dark accent. */}
+            <h1 className="mt-4 font-display text-[clamp(2.3rem,6.5vw,5.25rem)] font-black leading-[0.95] tracking-[-0.02em] text-cream">
+              <span className="block whitespace-nowrap">{slide.titleA}</span>
+              <span className="block whitespace-nowrap text-honey">{slide.titleB}</span>
+            </h1>
+
+            <p className="mt-6 max-w-xl text-lg font-medium leading-relaxed text-cream/90 sm:text-xl">
+              {slide.text}
+            </p>
+
+            <div className="mt-9 flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:gap-6">
+              <Link
+                href={slide.href}
+                className="min-h-[60px] rounded-full bg-ember px-10 py-4 font-display text-xl font-black text-white transition hover:-translate-y-0.5 hover:bg-ember-deep active:scale-95"
+              >
+                {slide.cta}
+              </Link>
+              <span className="text-sm font-bold text-butter">{slide.chip}</span>
+            </div>
+
+            <Link
+              href="/shop"
+              className="mt-6 inline-flex min-h-[44px] items-center text-sm font-bold text-cream/90 underline-offset-4 transition hover:text-cream hover:underline"
+            >
+              Not ready to build? Browse what&apos;s already on the counter
+              <span aria-hidden> →</span>
+            </Link>
+          </div>
         </div>
 
         {/* ------------------------------ controls ----------------------------- */}
-        <div className="mt-14 flex flex-col gap-6 sm:mt-16 lg:flex-row lg:items-center lg:justify-between">
+        <div className="mt-8 flex items-center justify-between gap-6 sm:mt-10 lg:mt-16">
           <div className="flex items-center gap-1">
             <button
               type="button"
               onClick={() => go(index - 1)}
               aria-label="Show previous slide"
-              className="flex h-12 w-12 items-center justify-center rounded-full text-2xl text-cream/60 transition hover:bg-cream/10 hover:text-cream active:scale-95"
+              className="flex h-12 w-12 items-center justify-center rounded-full text-2xl text-cream/70 transition hover:bg-cream/10 hover:text-cream active:scale-95"
             >
               <span aria-hidden>&#8592;</span>
             </button>
@@ -274,15 +286,15 @@ export default function HeroSection() {
                 >
                   <span
                     className={cn(
-                      "block h-2 w-full overflow-hidden rounded-full bg-cream/25 transition-colors sm:w-14",
-                      i === index && "bg-cream/30"
+                      "block h-2 w-full overflow-hidden rounded-full bg-cream/30 transition-colors sm:w-14",
+                      i === index && "bg-cream/40"
                     )}
                   >
                     {/* Progress fill: CSS-driven, so pausing is just play-state */}
                     {i === index && (
                       <span
                         key={`${index}-${paused}`}
-                        className="block h-full w-full origin-left animate-hero-progress bg-strawberry motion-reduce:hidden"
+                        className="block h-full w-full origin-left animate-hero-progress bg-ember motion-reduce:hidden"
                         style={
                           {
                             animationDuration: `${ROTATE_MS}ms`,
@@ -300,7 +312,7 @@ export default function HeroSection() {
               type="button"
               onClick={() => go(index + 1)}
               aria-label="Show next slide"
-              className="flex h-12 w-12 items-center justify-center rounded-full text-2xl text-cream/60 transition hover:bg-cream/10 hover:text-cream active:scale-95"
+              className="flex h-12 w-12 items-center justify-center rounded-full text-2xl text-cream/70 transition hover:bg-cream/10 hover:text-cream active:scale-95"
             >
               <span aria-hidden>&#8594;</span>
             </button>
@@ -311,11 +323,17 @@ export default function HeroSection() {
               Scroll to explore
             </span>
             <div className="flex h-9 w-5 items-start justify-center rounded-full border border-cream/25">
-              <div className="mt-2 h-1.5 w-1 animate-pulse rounded-full bg-strawberry motion-reduce:animate-none" />
+              <div className="mt-2 h-1.5 w-1 animate-pulse rounded-full bg-ember motion-reduce:animate-none" />
             </div>
           </div>
         </div>
       </div>
+
+      {/* Hairline frame keeps the landscape feeling like a placed print. */}
+      <div
+        className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-cream/10"
+        aria-hidden="true"
+      />
     </section>
   );
 }

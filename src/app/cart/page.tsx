@@ -15,9 +15,9 @@ const KIND_LABEL: Record<string, string> = {
 };
 
 const KIND_ICON: Record<string, string> = {
-  cake: "from-blush to-butter",
-  donut: "from-lilac to-blush",
-  smoothie: "from-mint to-sky",
+  cake: "bg-sand",
+  donut: "bg-butter/40",
+  smoothie: "bg-mint/60",
 };
 
 export default function CartPage() {
@@ -75,7 +75,7 @@ export default function CartPage() {
           <Link
             href="/build"
             data-cart-cta
-            className="shine min-h-[52px] rounded-full bg-gradient-to-br from-berry to-strawberry px-8 py-3 font-display text-lg font-black text-white shadow-lg transition hover:brightness-110 active:scale-95"
+            className="min-h-[52px] rounded-full bg-ember px-8 py-3 font-display text-lg font-black text-white transition hover:bg-ember-deep active:scale-95"
           >
             Build me something
           </Link>
@@ -103,7 +103,7 @@ export default function CartPage() {
         {announcement}
       </p>
 
-      <p className="text-label uppercase text-berry">
+      <p className="text-label uppercase text-ember">
         {itemCount} {itemCount === 1 ? "treat" : "treats"}, all yours
       </p>
       <h1 className="mt-1 font-display text-display">
@@ -114,7 +114,7 @@ export default function CartPage() {
         {items.map((item) => (
           <li
             key={item.key}
-            className="flex gap-4 rounded-3xl bg-milk p-4 shadow-[0_2px_16px_rgba(62,42,32,0.07)]"
+            className="flex gap-4 rounded-3xl bg-milk p-4 shadow-[0_2px_16px_rgba(43,28,21,0.07)]"
           >
             {item.imageId ? (
               <FoodImage
@@ -126,7 +126,7 @@ export default function CartPage() {
             ) : (
               <div
                 aria-hidden
-                className={`flex h-24 w-24 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br ${KIND_ICON[item.kind] ?? "from-blush to-butter"}`}
+                className={`flex h-24 w-24 shrink-0 items-center justify-center rounded-2xl ${KIND_ICON[item.kind] ?? "bg-sand"}`}
               >
                 <span className="font-display text-display text-choco/60">
                   {item.name.charAt(0)}
@@ -137,7 +137,7 @@ export default function CartPage() {
             <div className="min-w-0 flex-1">
               {/* BUG FIX: this read `uppercasest`, an invalid Tailwind class, so the
                   kind label rendered unstyled in sentence case. */}
-              <p className="text-label uppercase text-berry">
+              <p className="text-label uppercase text-ember">
                 {KIND_LABEL[item.kind] ?? item.kind}
               </p>
               <h2 className="font-display text-lg font-black leading-snug">{item.name}</h2>
@@ -156,7 +156,7 @@ export default function CartPage() {
                     onClick={() => setQty(item.key, item.qty - 1)}
                     disabled={item.qty <= 1}
                     data-row-control
-                    className="flex h-10 w-10 items-center justify-center text-xl font-black hover:text-berry disabled:cursor-not-allowed disabled:opacity-30"
+                    className="flex h-10 w-10 items-center justify-center text-xl font-black hover:text-ember disabled:cursor-not-allowed disabled:opacity-30"
                     aria-label={`Decrease quantity of ${item.name}`}
                   >
                     −
@@ -168,7 +168,7 @@ export default function CartPage() {
                   <button
                     type="button"
                     onClick={() => setQty(item.key, item.qty + 1)}
-                    className="flex h-10 w-10 items-center justify-center text-xl font-black hover:text-berry"
+                    className="flex h-10 w-10 items-center justify-center text-xl font-black hover:text-ember"
                     aria-label={`Increase quantity of ${item.name}`}
                   >
                     +
@@ -177,7 +177,7 @@ export default function CartPage() {
                 {item.editPath && (
                   <Link
                     href={`${item.editPath}?edit=${item.key}`}
-                    className="flex min-h-[40px] items-center rounded-full bg-blush px-4 text-xs font-bold transition hover:bg-rose active:scale-95"
+                    className="flex min-h-[40px] items-center rounded-full bg-sand px-4 text-xs font-bold transition hover:bg-butter/60 active:scale-95"
                     aria-label={`Edit ${item.name}`}
                   >
                     ✎ Tweak it
@@ -186,12 +186,12 @@ export default function CartPage() {
                 <button
                   type="button"
                   onClick={() => handleRemove(item.key, item.name)}
-                  className="flex min-h-[40px] items-center rounded-full px-3 text-xs font-bold text-berry transition hover:bg-blush active:scale-95"
+                  className="flex min-h-[40px] items-center rounded-full px-3 text-xs font-bold text-ember transition hover:bg-ember/10 active:scale-95"
                   aria-label={`Remove ${item.name} from cart`}
                 >
                   Remove
                 </button>
-                <p className="ml-auto font-display text-lg font-black text-berry">
+                <p className="ml-auto font-display text-lg font-black text-ember-deep">
                   <span className="sr-only">Line total for {item.name}: </span>
                   {ngn(item.unitPrice * item.qty)}
                 </p>
@@ -226,7 +226,7 @@ export default function CartPage() {
                 className="mt-2 h-2.5 overflow-hidden rounded-full bg-cocoa/40"
               >
                 <div
-                  className="h-full rounded-full bg-gradient-to-r from-strawberry to-mint transition-[width] duration-500"
+                  className="h-full rounded-full bg-mint transition-[width] duration-500"
                   style={{ width: `${deliveryProgress}%` }}
                 />
               </div>
@@ -241,7 +241,7 @@ export default function CartPage() {
           <Link
             href="/checkout"
             data-cart-cta
-            className="shine min-h-[52px] flex-1 rounded-full bg-gradient-to-br from-berry to-strawberry py-3 text-center font-display text-lg font-black text-white transition hover:brightness-110 active:scale-95"
+            className="min-h-[52px] flex-1 rounded-full bg-ember py-3 text-center font-display text-lg font-black text-white transition hover:bg-ember-deep active:scale-95"
           >
             Lock it in →
           </Link>

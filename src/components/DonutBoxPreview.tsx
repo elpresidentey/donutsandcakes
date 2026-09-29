@@ -58,8 +58,8 @@ function Donut({
         </radialGradient>
       </defs>
       {/* contact shadow so it sits in the box rather than floats */}
-      <ellipse cx={x + 1} cy={y + r * 0.42} rx={r * 0.96} ry={r * 0.5} fill="#3e2a20" opacity="0.22" />
-      <circle cx={x} cy={y} r={r} fill={`url(#dough-${seed})`} stroke="#3e2a20" strokeWidth="3.5" />
+      <ellipse cx={x + 1} cy={y + r * 0.42} rx={r * 0.96} ry={r * 0.5} fill="#2b1c15" opacity="0.22" />
+      <circle cx={x} cy={y} r={r} fill={`url(#dough-${seed})`} stroke="#2b1c15" strokeWidth="3.5" />
       {/* glaze blob */}
       <path
         d={`M${x - r * 0.92} ${y - r * 0.2}
@@ -68,7 +68,7 @@ function Donut({
             C${x + r * 0.85} ${y + r * 0.4} ${x + r * 0.4} ${y + r * 0.75} ${x} ${y + r * 0.7}
             C${x - r * 0.5} ${y + r * 0.65} ${x - r * 0.95} ${y + r * 0.3} ${x - r * 0.92} ${y - r * 0.2} Z`}
         fill={`url(#${gid})`}
-        stroke="#3e2a20"
+        stroke="#2b1c15"
         strokeWidth="2.5"
       />
       {/* wet highlight — the single biggest "this looks edible" cue */}
@@ -91,11 +91,11 @@ function Donut({
         opacity="0.9"
       />
       {/* hole with an inner shadow so it looks punched, not painted */}
-      <circle cx={x} cy={x === 0 ? 0 : y} r={r * 0.28} fill="#fff9f1" stroke="#3e2a20" strokeWidth="2.5" />
+      <circle cx={x} cy={x === 0 ? 0 : y} r={r * 0.28} fill="#fffdfa" stroke="#2b1c15" strokeWidth="2.5" />
       <path
         d={`M${x - r * 0.26} ${y - r * 0.1} a${r * 0.28} ${r * 0.28} 0 0 1 ${r * 0.52} 0`}
         fill="none"
-        stroke="#3e2a20"
+        stroke="#2b1c15"
         strokeWidth="3"
         opacity="0.28"
         strokeLinecap="round"
@@ -195,17 +195,17 @@ export default function DonutBoxPreview({
     <svg viewBox={`0 0 ${W} ${H}`} className="h-auto w-full" role="img" aria-label={`Donut box preview with ${count} donuts`}>
       <defs>
         <linearGradient id="boxWall" x1="0.1" y1="0" x2="0.6" y2="1">
-          <stop offset="0%" stopColor="#fdf3f7" />
-          <stop offset="100%" stopColor="#efd2e0" />
+          <stop offset="0%" stopColor="#fbf4e6" />
+          <stop offset="100%" stopColor="#e8d5b8" />
         </linearGradient>
         <filter id="boxSoft" x="-30%" y="-30%" width="160%" height="160%">
           <feGaussianBlur stdDeviation="8" />
         </filter>
       </defs>
-      <rect x="4" y="16" width={W - 8} height={H - 8} rx={22} fill="#3e2a20" opacity="0.15" filter="url(#boxSoft)" />
-      <rect x={4} y={4} width={W - 8} height={H - 8} rx={22} fill="url(#boxWall)" stroke="#3e2a20" strokeWidth="4" />
-      <rect x={4} y={4} width={W - 8} height={30} rx={15} fill="#b04a76" opacity="0.32" />
-      <text x={W / 2} y={25} textAnchor="middle" fontFamily="Quicksand, sans-serif" fontWeight={700} fontSize={13} fill="#3e2a20" letterSpacing={2}>
+      <rect x="4" y="16" width={W - 8} height={H - 8} rx={22} fill="#2b1c15" opacity="0.15" filter="url(#boxSoft)" />
+      <rect x={4} y={4} width={W - 8} height={H - 8} rx={22} fill="url(#boxWall)" stroke="#2b1c15" strokeWidth="4" />
+      <rect x={4} y={4} width={W - 8} height={30} rx={15} fill="#c2410c" opacity="0.32" />
+      <text x={W / 2} y={25} textAnchor="middle" style={{ fontFamily: "var(--font-sans)" }} fontWeight={700} fontSize={13} fill="#2b1c15" letterSpacing={2}>
         DONUTS & CAKES · {count}CT
       </text>
       {slots.map((s, i) => {

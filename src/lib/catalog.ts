@@ -394,7 +394,7 @@ export interface HeroSlide {
   cta: string;
   href: string;
   image: Img;
-  bg: string; // pastel gradient classes
+  bg: string; // flat hex tint behind the hero photo
   chip: string;
 }
 
@@ -407,7 +407,7 @@ export const HERO_SLIDES: HeroSlide[] = [
     cta: "Build Your Cake",
     href: "/build/cake",
     image: IMAGES.heroCake,
-    bg: "from-blush via-[#f9e8ef] to-butter",
+    bg: "#f0e2d0",
     chip: "From ₦18,000",
   },
   {
@@ -418,7 +418,7 @@ export const HERO_SLIDES: HeroSlide[] = [
     cta: "Build Your Box",
     href: "/build/donuts",
     image: IMAGES.heroDonuts,
-    bg: "from-lilac via-[#f1ecff] to-blush",
+    bg: "#efe0c8",
     chip: "From ₦6,800",
   },
   {
@@ -429,7 +429,7 @@ export const HERO_SLIDES: HeroSlide[] = [
     cta: "Build Your Blend",
     href: "/build/smoothie",
     image: IMAGES.heroSmoothie,
-    bg: "from-mint via-[#ecf9f0] to-sky",
+    bg: "#e0ecdf",
     chip: "From ₦3,500",
   },
 ];

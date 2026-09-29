@@ -1,38 +1,43 @@
-@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,900&family=Quicksand:wght@400;500;600;700&display=swap");
 @import "tailwindcss";
 
 @theme {
-  --font-display: "Fraunces", "Georgia", serif;
-  --font-sans: "Quicksand", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
-    sans-serif;
+  /* These reference the custom properties next/font injects on <html>
+     (layout.tsx). next/font serves hashed family names such as
+     `__Fraunces_1a2b3c`, so a literal "Fraunces" here would never match and
+     every heading would silently fall back to Georgia. The generic families
+     stay on as a last resort if the font files themselves fail to load. */
+  --font-display: var(--font-fraunces), Georgia, serif;
+  --font-sans: var(--font-instrument), ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", sans-serif;
 
-  --color-cream: #fff9f1;
-  --color-milk: #ffffff;
-  --color-choco: #3e2a20;
-  --color-cocoa: #241611;
+  /* ---------------------------------------------------------------------
+     Ember & Ink — one flat, editorial palette for the whole app.
 
-  /* Rose family. Deliberately muted: strawberry is a soft raspberry rather
-     than a neon pink, because saturated magenta reads as "cosmetics" next to
-     warm cake photography. Big fills use berry, which is deeper and calmer;
-     strawberry is reserved for accents. Contrast vs white: strawberry 5.1:1,
-     berry 9.2:1 — both clear WCAG AA for white text. */
-  --color-strawberry: #b04a76;
-  --color-berry: #6d2148;
-  --color-blush: #f9e8ef;
-  --color-rose: #e8b9d2;
+     Warm paper neutrals, ink-dark type, a single burnt-orange accent.
+     Hierarchy is built from type weight, hairline borders and solid blocks.
+     No gradients, no pinks, no glows.
+
+     Contrast (WCAG 2.1):
+       choco on cream ....... 14.7:1
+       choco/70 on milk ...... 6.1:1   (secondary copy)
+       ember on milk ......... 5.2:1   (white on ember: 5.2:1)
+       ember-deep on milk .... 8.3:1
+       honey on cocoa ........ 8.5:1   (accents on dark surfaces)
+  --------------------------------------------------------------------- */
+  --color-cream: #f7f2e8; /* page paper */
+  --color-milk: #fffdfa; /* raised surface */
+  --color-sand: #efe4d3; /* quiet fill: chips, tiles, bands */
+  --color-choco: #2b1c15; /* ink: body copy, dark buttons */
+  --color-cocoa: #191009; /* deepest surface: footer, dark bands */
+
+  --color-ember: #c2410c; /* accent: actions, prices, hints */
+  --color-ember-deep: #8f2c07;
 
   --color-butter: #ffe1a8;
   --color-honey: #e9a100;
-  --color-tangerine: #ff8a4c;
 
-  --color-mint: #bfebce;
+  --color-mint: #d5ebdc;
   --color-leaf: #1e7a46;
-
-  --color-lilac: #dcd2ff;
-  --color-grape: #6c4fc4;
-
-  --color-sky: #c9e7ff;
-  --color-ocean: #1d6fb8;
 
   /* ---------------------------------------------------------------------
      Type scale. One ladder for the whole app so headings stop drifting
@@ -173,8 +178,9 @@ html {
 input:focus-visible,
 textarea:focus-visible,
 select:focus-visible {
-  outline: 3px solid var(--color-strawberry);
+  outline: 3px solid var(--color-ember);
   outline-offset: 2px;
+  border-color: var(--color-ember-deep);
 }
 
 body {
@@ -186,7 +192,7 @@ body {
 }
 
 ::selection {
-  background: var(--color-strawberry);
+  background: var(--color-ember);
   color: #fff;
 }
 
@@ -216,63 +222,23 @@ body {
   transform: scale(0.96);
 }
 
-/* Specular sweep across primary buttons on hover/focus. */
-.shine {
-  position: relative;
-  isolation: isolate;
-  overflow: hidden;
+/* Oversized outlined numerals used as section indices. The @supports block
+   keeps a readable solid fallback on engines without text-stroke. */
+.text-outline {
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--color-choco);
 }
-.shine::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: linear-gradient(
-    100deg,
-    transparent 25%,
-    rgb(255 255 255 / 0.38) 50%,
-    transparent 75%
-  );
-  transform: translateX(-130%);
-  transition: transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+.text-outline-light {
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgb(247 242 232 / 0.5);
 }
-.shine:hover::after,
-.shine:focus-visible::after {
-  transform: translateX(130%);
-}
-
-/* Slow ambient drift for decorative glows. Transform-only, so it stays on the
-   compositor and never triggers layout. */
-@keyframes drift {
-  0%,
-  100% {
-    transform: translate3d(0, 0, 0) scale(1);
+@supports not (-webkit-text-stroke: 1px black) {
+  .text-outline {
+    color: var(--color-choco);
   }
-  50% {
-    transform: translate3d(4%, -6%, 0) scale(1.14);
+  .text-outline-light {
+    color: rgb(247 242 232 / 0.55);
   }
-}
-.blob {
-  animation: drift 22s ease-in-out infinite;
-  will-change: transform;
-}
-.blob-slow {
-  animation-duration: 36s;
-  animation-direction: reverse;
-}
-
-/* Dotted pastel texture used behind sections */
-.texture-dots {
-  background-image: radial-gradient(
-    color-mix(in srgb, var(--color-strawberry) 16%, transparent) 1.5px,
-    transparent 1.5px
-  );
-  background-size: 22px 22px;
-}
-
-.texture-dots-light {
-  background-image: radial-gradient(#ffffff2e 1.5px, transparent 1.5px);
-  background-size: 20px 20px;
 }
 
 .no-scrollbar {
@@ -290,16 +256,9 @@ body {
    with no visible indicator at all.
 --------------------------------------------------------------------------- */
 :focus-visible {
-  outline: 3px solid var(--color-strawberry);
+  outline: 3px solid var(--color-ember);
   outline-offset: 2px;
   border-radius: 6px;
-}
-
-/* Belt and braces for form controls, which sit on coloured fills. */
-input:focus-visible,
-textarea:focus-visible,
-select:focus-visible {
-  border-color: var(--color-berry);
 }
 
 /* Respect users who prefer no motion: site must work without animation */

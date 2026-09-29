@@ -39,7 +39,7 @@ const STUDIOS = [
 export default function BuildHubPage() {
   return (
     <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6">
-      <p className="text-label uppercase text-berry">
+      <p className="text-label uppercase text-ember">
         The studios
       </p>
       <h1 className="mt-1 font-display text-display">
@@ -55,7 +55,7 @@ export default function BuildHubPage() {
           <Link
             key={s.href}
             href={s.href}
-            className="group flex flex-col overflow-hidden rounded-[2rem] bg-milk shadow-[0_2px_16px_rgba(62,42,32,0.07)] transition-transform hover:-translate-y-1 hover:shadow-[0_16px_40px_rgba(109,33,72,0.2)]"
+            className="group flex flex-col overflow-hidden rounded-[2rem] bg-milk shadow-[0_2px_16px_rgba(43,28,21,0.07)] transition-transform hover:-translate-y-1 hover:shadow-[0_16px_40px_rgba(43,28,21,0.16)]"
           >
             <div className="relative overflow-hidden">
               <FoodImage
@@ -68,14 +68,14 @@ export default function BuildHubPage() {
               <span className="absolute left-4 top-4 rounded-full bg-cocoa/85 px-3 py-1 text-label uppercase text-cream">
                 {s.n}
               </span>
-              <span className="absolute bottom-4 right-4 rounded-full bg-milk px-3 py-1 text-xs font-black text-berry shadow">
+              <span className="absolute bottom-4 right-4 rounded-full bg-milk px-3 py-1 text-xs font-black text-ember-deep shadow">
                 {s.chip}
               </span>
             </div>
             <div className="flex flex-1 flex-col p-6">
               <h2 className="font-display text-2xl font-black">{s.title}</h2>
               <p className="mt-2 flex-1 text-sm leading-relaxed text-choco/70">{s.text}</p>
-              <span className="mt-4 inline-block self-start rounded-full bg-gradient-to-br from-berry to-strawberry px-6 py-2.5 text-sm font-bold text-white transition group-hover:brightness-110">
+              <span className="mt-4 inline-block self-start rounded-full bg-ember px-6 py-2.5 text-sm font-bold text-white transition group-hover:bg-ember-deep">
                 Enter studio →
               </span>
             </div>

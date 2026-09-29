@@ -1,10 +1,33 @@
 import type { Metadata, Viewport } from "next";
+import { Fraunces, Instrument_Sans } from "next/font/google";
 import "./globals.css";
 import { CartProvider } from "@/store/cart";
 import SiteHeader from "@/components/SiteHeader";
 import MobileNav from "@/components/MobileNav";
 import SiteFooter from "@/components/SiteFooter";
 import PwaRegister from "@/components/PwaRegister";
+
+/* Self-hosted at build time — no runtime call to fonts.googleapis.com, so type
+   renders identically on a cold cache, a slow connection or offline.
+
+   Both faces are requested as variable fonts (weight omitted) rather than as a
+   fixed weight list: the app leans on 900 for display type but also sets 800
+   via --text-label, and a variable axis serves every step without synthesised
+   faux-bold. `latin-ext` is included because Yoruba and Igbo names use
+   characters outside basic latin (ẹ ọ ṣ ị ụ); the browser only fetches that
+   subset when such a glyph actually appears. */
+const fraunces = Fraunces({
+  subsets: ["latin", "latin-ext"],
+  axes: ["opsz"],
+  variable: "--font-fraunces",
+  display: "swap",
+});
+
+const instrumentSans = Instrument_Sans({
+  subsets: ["latin", "latin-ext"],
+  variable: "--font-instrument",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: {
@@ -29,7 +52,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#b04a76",
+  themeColor: "#c2410c",
   width: "device-width",
   initialScale: 1,
 };
@@ -38,7 +61,10 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en-NG">
+    <html
+      lang="en-NG"
+      className={`${fraunces.variable} ${instrumentSans.variable}`}
+    >
       <body className="antialiased">
         <CartProvider>
           <a
