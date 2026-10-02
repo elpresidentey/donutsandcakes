@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useCart } from "@/store/cart";
+import { saveOrder } from "@/lib/orders";
 import { ngn } from "@/lib/format";
 import { cn } from "@/lib/utils";
 
@@ -122,8 +123,7 @@ export default function CheckoutPage() {
 
     const no = `DC-${Date.now().toString(36).toUpperCase().slice(-6)}`;
     try {
-      const orders = JSON.parse(window.localStorage.getItem("dc-orders-v1") ?? "[]");
-      orders.push({
+      saveOrder({
         no,
         at: new Date().toISOString(),
         name,
@@ -135,7 +135,6 @@ export default function CheckoutPage() {
         items,
         subtotal,
       });
-      window.localStorage.setItem("dc-orders-v1", JSON.stringify(orders));
     } catch {
       setError(
         "We couldn't save your order on this device (storage is blocked). Please try again, or message us on WhatsApp so we don't miss your order."

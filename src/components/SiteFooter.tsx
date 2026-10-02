@@ -18,9 +18,13 @@ export default function SiteFooter() {
             cake, box and blend yourself — we&apos;ll make it exactly as you
             pictured it, fresh in Lagos.
           </p>
-          <p className="mt-4 inline-flex items-center gap-2 rounded-full bg-cream/10 px-4 py-2 text-xs font-bold text-cream/90">
+          <Link
+            href="/contact"
+            className="mt-4 inline-flex items-center gap-2 rounded-full bg-cream/10 px-4 py-2 text-xs font-bold text-cream/90 transition hover:bg-cream/20"
+          >
             <span aria-hidden>🛵</span> Delivering across Lagos · Tue–Sun, 9am–8pm
-          </p>
+            <span aria-hidden>→</span>
+          </Link>
         </div>
 
         <nav aria-label="Shop links">
@@ -30,6 +34,8 @@ export default function SiteFooter() {
             <li><Link className="inline-flex min-h-[32px] items-center hover:text-honey" href="/donuts">Donuts</Link></li>
             <li><Link className="inline-flex min-h-[32px] items-center hover:text-honey" href="/smoothies">Smoothies &amp; Juices</Link></li>
             <li><Link className="inline-flex min-h-[32px] items-center hover:text-honey" href="/shop">Everything</Link></li>
+            <li><Link className="inline-flex min-h-[32px] items-center hover:text-honey" href="/orders">Your orders</Link></li>
+            <li><Link className="inline-flex min-h-[32px] items-center hover:text-honey" href="/contact">Contact us</Link></li>
           </ul>
         </nav>
 

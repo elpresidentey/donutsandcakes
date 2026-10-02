@@ -11,6 +11,7 @@ const LINKS = [
   { href: "/donuts", label: "Donuts" },
   { href: "/smoothies", label: "Smoothies" },
   { href: "/build", label: "Build" },
+  { href: "/contact", label: "Contact" },
 ];
 
 export function LogoMark({ className }: { className?: string }) {
