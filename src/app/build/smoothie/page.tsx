@@ -66,6 +66,16 @@ function SmoothieBuilderForm() {
   const toggleExtra = (v: string) =>
     setExtras((prev) => (prev.includes(v) ? prev.filter((e) => e !== v) : [...prev, v]));
 
+  const surprise = () => {
+    const pick = <T,>(l: T[]) => l[Math.floor(Math.random() * l.length)];
+    setSize(pick(SMOOTHIE_SIZES.map((o) => o.value)));
+    setBase(pick(SMOOTHIE_BASES.map((o) => o.value)));
+    const pool = SMOOTHIE_FRUITS.map((o) => o.value);
+    setFruits([...pool].sort(() => Math.random() - 0.5).slice(0, 1 + Math.floor(Math.random() * 4)));
+    const exPool = SMOOTHIE_EXTRAS.map((o) => o.value);
+    setExtras(exPool.filter(() => Math.random() > 0.7).slice(0, 2));
+  };
+
   const handleAdd = () => {
     if (!valid) return;
     const details = [
@@ -106,6 +116,15 @@ function SmoothieBuilderForm() {
       cta={editKey ? "Update cart" : "Add to cart"}
       onAdd={handleAdd}
     >
+      <div className="mb-6">
+        <button
+          type="button"
+          onClick={surprise}
+          className="min-h-[44px] rounded-full bg-cocoa px-5 text-sm font-bold text-cream transition hover:bg-ember active:scale-95"
+        >
+          🎲 Surprise me — the blender decides
+        </button>
+      </div>
       <Step n="01" title="Size" hint="Regular quenches. Large commits.">
         <SinglePicker label="Smoothie size" options={SMOOTHIE_SIZES} value={size} onChange={setSize} />
       </Step>

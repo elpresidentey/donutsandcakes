@@ -144,6 +144,8 @@ export default function CheckoutPage() {
     setOrderNo(no);
     setStage("done");
     clear();
+    // Celebrate the new order.
+    window.dispatchEvent(new CustomEvent("dc:order-done"));
     window.scrollTo({ top: 0 });
   };
 

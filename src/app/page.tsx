@@ -246,6 +246,24 @@ export default function HomePage() {
       {/* Final CTA */}
       <Reveal as="section" className="mx-auto max-w-6xl px-4 py-14 sm:px-6">
         <div className="relative overflow-hidden rounded-[2rem] bg-cocoa p-8 text-center text-white ring-1 ring-inset ring-cream/10 sm:p-14">
+          {/* Floating treats keep the panel feeling alive without competing with the copy. */}
+          <div aria-hidden className="pointer-events-none absolute inset-0 select-none">
+            {[
+              { e: "🍩", x: "8%",  y: "18%", d: "0s",  s: "animate-float" },
+              { e: "🧁", x: "86%", y: "24%", d: "0.8s", s: "animate-float-slow" },
+              { e: "🥤", x: "14%", y: "72%", d: "0.4s", s: "animate-float-slow" },
+              { e: "✨", x: "78%", y: "68%", d: "1.2s", s: "animate-float" },
+              { e: "🥐", x: "46%", y: "8%",  d: "0.5s", s: "animate-float" },
+            ].map((t, i) => (
+              <span
+                key={i}
+                className={`absolute text-3xl opacity-80 ${t.s}`}
+                style={{ left: t.x, top: t.y, animationDelay: t.d }}
+              >
+                {t.e}
+              </span>
+            ))}
+          </div>
           <div className="relative">
             <h2 className="mx-auto max-w-2xl font-display text-heading sm:text-display">
               The sweetest thing you&apos;ll do this week

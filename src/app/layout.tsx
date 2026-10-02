@@ -6,6 +6,7 @@ import SiteHeader from "@/components/SiteHeader";
 import MobileNav from "@/components/MobileNav";
 import SiteFooter from "@/components/SiteFooter";
 import PwaRegister from "@/components/PwaRegister";
+import SprinkleBurst from "@/components/SprinkleBurst";
 
 /* Self-hosted at build time — no runtime call to fonts.googleapis.com, so type
    renders identically on a cold cache, a slow connection or offline.
@@ -90,6 +91,7 @@ export default function RootLayout({
           </div>
           <MobileNav />
           <PwaRegister />
+          <SprinkleBurst />
         </CartProvider>
       </body>
     </html>

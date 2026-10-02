@@ -86,6 +86,20 @@ function CakeBuilderForm() {
   const toggleTopping = (v: string) =>
     setToppings((prev) => (prev.includes(v) ? prev.filter((t) => t !== v) : [...prev, v]));
 
+  const pick = <T,>(list: T[]) => list[Math.floor(Math.random() * list.length)];
+  const surprise = () => {
+    setShape(pick(CAKE_SHAPES.map((o) => o.value)));
+    setSize(pick(CAKE_SIZES.map((o) => o.value)));
+    setFlavour(pick(CAKE_FLAVOURS.map((o) => o.value)));
+    setFilling(pick(CAKE_FILLINGS.map((o) => o.value)));
+    setFrosting(pick(CAKE_FROSTINGS.map((o) => o.value)));
+    const pool = CAKE_TOPPINGS.map((o) => o.value);
+    setToppings(pool.filter(() => Math.random() > 0.55).slice(0, 4));
+    const lines = ["Lagos, Nigeria", "Happy Birthday!", "Congratulations!", "God Is Good", "Ada's Special", "It's a party"];
+    setInscription(pick(lines));
+    setGold(Math.random() > 0.5);
+  };
+
   const handleAdd = () => {
     const details = [
       `Shape: ${shape}`,
@@ -136,6 +150,15 @@ function CakeBuilderForm() {
       cta={editKey ? "Update cart" : "Add to cart"}
       onAdd={handleAdd}
     >
+      <div className="mb-6">
+        <button
+          type="button"
+          onClick={surprise}
+          className="min-h-[44px] rounded-full bg-cocoa px-5 text-sm font-bold text-cream transition hover:bg-ember active:scale-95"
+        >
+          🎲 Surprise me — let fate frost
+        </button>
+      </div>
       <Step n="01" title="Shape" hint="The silhouette of your showpiece.">
         <SinglePicker label="Cake shape" options={CAKE_SHAPES} value={shape} onChange={setShape} />
       </Step>
