@@ -55,6 +55,10 @@ export const viewport: Viewport = {
   themeColor: "#c2410c",
   width: "device-width",
   initialScale: 1,
+  // Without viewport-fit=cover iOS reports every env(safe-area-inset-*) as 0, so
+  // the fixed bottom nav gets no home-indicator padding and its tabs sit flush
+  // against (and under) the gesture bar. This is what makes the insets real.
+  viewportFit: "cover",
 };
 
 export default function RootLayout({
@@ -81,7 +85,7 @@ export default function RootLayout({
           <main id="main" tabIndex={-1} className="min-h-[70vh] pb-24 outline-none md:pb-0">
             {children}
           </main>
-          <div className="pb-20 md:pb-0">
+          <div className="pb-[calc(5rem+env(safe-area-inset-bottom))] md:pb-0">
             <SiteFooter />
           </div>
           <MobileNav />
