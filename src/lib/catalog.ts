@@ -145,7 +145,7 @@ export const PRODUCTS: Product[] = [
     name: "Strawberry Cloud Cupcakes",
     tagline: "Box of 4 · fresh strawberry tops",
     description:
-      "Light vanilla sponge, whipped strawberry frosting and a fresh strawberry on every cup. Tastes like a Lagos weekend.",
+      "Light vanilla sponge, whipped strawberry frosting and a fresh strawberry on every cup. Tastes like a Nigerian weekend.",
     ingredients: ["Vanilla sponge", "Strawberry whipped cream", "Fresh strawberries"],
     price: 9800,
     image: IMAGES.strawberryCups,
@@ -464,7 +464,7 @@ export const PRODUCTS: Product[] = [
     name: "Mango Tango",
     tagline: "Ripe mango · yoghurt · honey",
     description:
-      "Thick-blended ripe mangoes with creamy yoghurt and a touch of honey. Golden, tropical and the taste of a good Lagos afternoon.",
+      "Thick-blended ripe mangoes with creamy yoghurt and a touch of honey. Golden, tropical and the taste of a good Nigerian afternoon.",
     ingredients: ["Ripe mangoes", "Creamy yoghurt", "Honey", "Ice"],
     price: 5500,
     image: IMAGES.mangoTango,
@@ -564,7 +564,7 @@ export const PRODUCTS: Product[] = [
     name: "Citrus Press Cooler",
     tagline: "Orange · pineapple · mint",
     description:
-      "Orange and pineapple pressed together over ice with torn mint. The cooler every Lagos afternoon deserves.",
+      "Orange and pineapple pressed together over ice with torn mint. The cooler every Nigerian afternoon deserves.",
     ingredients: ["Oranges", "Pineapple", "Fresh mint"],
     price: 4200,
     image: IMAGES.orangePress,
@@ -588,7 +588,7 @@ export const PRODUCTS: Product[] = [
     name: "Watermelon Juice",
     tagline: "Cold-pressed watermelon",
     description:
-      "Fresh watermelon pressed into a light, hydrating pink juice. The most refreshing thing on the menu on a hot Lagos day.",
+      "Fresh watermelon pressed into a light, hydrating pink juice. The most refreshing thing on the menu on a hot Nigerian day.",
     ingredients: ["100% fresh watermelon", "Lime"],
     price: 4000,
     image: IMAGES.watermelonJuice,

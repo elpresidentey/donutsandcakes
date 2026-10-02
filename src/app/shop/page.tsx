@@ -79,7 +79,7 @@ export default function ShopPage() {
         Everything we bake
       </h1>
       <p className="mt-2 max-w-xl text-choco/70">
-        {PRODUCTS.length} treats, all made fresh in our Lagos kitchen. Cakes for
+        {PRODUCTS.length} treats, all made fresh in our kitchen. Cakes for
         the big days, boxes for the whole office, cold sips for the heat.
       </p>
 

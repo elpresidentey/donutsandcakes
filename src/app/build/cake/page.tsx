@@ -95,7 +95,7 @@ function CakeBuilderForm() {
     setFrosting(pick(CAKE_FROSTINGS.map((o) => o.value)));
     const pool = CAKE_TOPPINGS.map((o) => o.value);
     setToppings(pool.filter(() => Math.random() > 0.55).slice(0, 4));
-    const lines = ["Lagos, Nigeria", "Happy Birthday!", "Congratulations!", "God Is Good", "Ada's Special", "It's a party"];
+    const lines = ["Nigeria", "Happy Birthday!", "Congratulations!", "God Is Good", "Ada's Special", "It's a party"];
     setInscription(pick(lines));
     setGold(Math.random() > 0.5);
   };

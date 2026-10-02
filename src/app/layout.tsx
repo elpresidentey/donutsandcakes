@@ -7,6 +7,7 @@ import MobileNav from "@/components/MobileNav";
 import SiteFooter from "@/components/SiteFooter";
 import PwaRegister from "@/components/PwaRegister";
 import SprinkleBurst from "@/components/SprinkleBurst";
+import InstallPrompt from "@/components/InstallPrompt";
 
 /* Self-hosted at build time — no runtime call to fonts.googleapis.com, so type
    renders identically on a cold cache, a slow connection or offline.
@@ -32,11 +33,11 @@ const instrumentSans = Instrument_Sans({
 
 export const metadata: Metadata = {
   title: {
-    default: "Donuts & Cakes — Build Your Dessert | Lagos",
+    default: "Donuts & Cakes — Build Your Dessert | Nigeria",
     template: "%s · Donuts & Cakes",
   },
   description:
-    "A premium Nigerian dessert studio. Build your own cakes, donut boxes and smoothies — or shop ready-made treats, natural juices and more. Lagos, Nigeria.",
+    "A premium Nigerian dessert studio. Build your own cakes, donut boxes and smoothies — or shop ready-made treats, natural juices and more. Nigeria.",
   manifest: "/manifest.webmanifest",
   appleWebApp: {
     capable: true,
@@ -92,6 +93,7 @@ export default function RootLayout({
           <MobileNav />
           <PwaRegister />
           <SprinkleBurst />
+          <InstallPrompt />
         </CartProvider>
       </body>
     </html>

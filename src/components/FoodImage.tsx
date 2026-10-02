@@ -5,6 +5,9 @@ import { useState } from "react";
 import { px } from "@/lib/images";
 import { cn } from "@/lib/utils";
 
+const BLUR =
+  "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAr0lEQVR4nKXMuw2CUBQG4LOPI7iBI7CAsbextLOxNy7AAia2dsaCxEQMCoovnoJw74UL5W9YgTPA91GrErQyRiMjNCKELgPo4gNdvFD/nqjzB6rMR5Xdob43qNSDSl3I5AoZX0AcLCIHxMEiOoM4WIQ2iIPL4ATi4Nzdd0F/nFpbEAeHOxPEwe/NCsTBvrnogv7YW89AHOwsJyAOtudGF/THx+kIxMHWeAji4IMxwB+GU48zgXmphQAAAABJRU5ErkJggg==";
+
 interface FoodImageProps {
   id: number;
   alt: string;
@@ -59,6 +62,8 @@ export default function FoodImage({
       height={Math.round((width * 3) / 4)}
       sizes={sizes}
       priority={priority}
+      placeholder="blur"
+      blurDataURL={BLUR}
       loading={eager || priority ? undefined : "lazy"}
       onError={() => setFailed(true)}
       className={className}

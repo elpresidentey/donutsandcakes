@@ -4,7 +4,7 @@ import CategoryView from "@/components/CategoryView";
 export const metadata: Metadata = {
   title: "Cakes",
   description:
-    "Ready-made celebration cakes, cupcakes and fully custom builds. Chocolate, vanilla, red velvet and more — Lagos, Nigeria.",
+    "Ready-made celebration cakes, cupcakes and fully custom builds. Chocolate, vanilla, red velvet and more — Nigeria.",
 };
 
 export default function CakesPage() {

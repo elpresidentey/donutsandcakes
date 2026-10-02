@@ -10,7 +10,7 @@ import { IMAGES } from "@/lib/images";
 const MARQUEE = [
   "Baked fresh every morning",
   "No sodas, ever",
-  "Made in Lagos",
+  "Made fresh in Nigeria",
   "Real fruit, always",
   "Custom builders",
   "Party boxes",
@@ -132,7 +132,7 @@ export default function HomePage() {
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
           <div id="best">
             <SectionHeading
-              eyebrow="Loved in Lagos"
+              eyebrow="Loved nationwide"
               title="The ones that keep selling out"
               linkHref="/shop"
               linkLabel="See the full menu"
@@ -227,7 +227,7 @@ export default function HomePage() {
       {/* Testimonials */}
       <Reveal as="section" className="bg-sand/60 py-12" aria-labelledby="love">
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
-          <SectionHeading eyebrow="Sweet words" title="What Lagos is saying about us" />
+          <SectionHeading eyebrow="Sweet words" title="What our customers are saying" />
           <h2 id="love" className="sr-only">Customer reviews</h2>
           <div className="grid gap-4 md:grid-cols-3">
             {QUOTES.map((t, i) => (

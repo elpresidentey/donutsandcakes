@@ -210,12 +210,12 @@ export default function CartPage() {
         <div className="mt-4 rounded-2xl bg-cream/10 p-4">
           {toFreeDelivery === 0 ? (
             <p className="text-sm font-bold text-mint">
-              🎉 Free delivery unlocked across Lagos. That one&apos;s on us.
+              🎉 Free delivery unlocked across Nigeria. That one&apos;s on us.
             </p>
           ) : (
             <>
               <p className="text-sm font-bold text-cream/90">
-                Add {ngn(toFreeDelivery)} more and Lagos delivery is on us.
+                Add {ngn(toFreeDelivery)} more and delivery is on us.
               </p>
               <div
                 role="progressbar"

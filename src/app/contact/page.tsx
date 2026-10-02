@@ -5,7 +5,7 @@ import { CONTACT, whatsappLink } from "@/lib/contact";
 export const metadata: Metadata = {
   title: "Contact",
   description:
-    "Message us on WhatsApp, call, or email. Hours, delivery area and lead times for Donuts & Cakes, Lagos.",
+    "Message us on WhatsApp, call, or email. Hours, delivery area and lead times for Donuts & Cakes, Nigeria.",
 };
 
 const CHANNELS = [
@@ -79,7 +79,7 @@ export default function ContactPage() {
           <p className="mt-3 max-w-xl font-medium text-cream/85">
             Questions, custom designs, a big order for an office or a wedding —
             WhatsApp is quickest, but pick whichever way suits you. A real person
-            in our Lagos kitchen reads every message.
+            in our kitchen reads every message.
           </p>
           <a
             href={whatsappLink("Hi Donuts & Cakes! I have a question 🍩")}

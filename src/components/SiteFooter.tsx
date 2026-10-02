@@ -16,13 +16,13 @@ export default function SiteFooter() {
             A Nigerian dessert studio built on one belief: you should never have
             to choose between what looks good and what tastes good. Design every
             cake, box and blend yourself — we&apos;ll make it exactly as you
-            pictured it, fresh in Lagos.
+            pictured it, fresh.
           </p>
           <Link
             href="/contact"
             className="mt-4 inline-flex items-center gap-2 rounded-full bg-cream/10 px-4 py-2 text-xs font-bold text-cream/90 transition hover:bg-cream/20"
           >
-            <span aria-hidden>🛵</span> Delivering across Lagos · Tue–Sun, 9am–8pm
+            <span aria-hidden>🛵</span> Delivering nationwide · Tue–Sun, 9am–8pm
             <span aria-hidden>→</span>
           </Link>
         </div>
@@ -51,7 +51,7 @@ export default function SiteFooter() {
       </div>
       <div className="border-t border-cream/15">
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-2 px-4 py-5 text-xs text-cream/60 sm:flex-row sm:px-6">
-          <p>© 2026 Donuts & Cakes · Lagos, Nigeria</p>
+          <p>© 2026 Donuts & Cakes · Nigeria</p>
           <p>No sodas. Ever. 🍩</p>
         </div>
       </div>

@@ -4,7 +4,7 @@ import CakeGallery from "@/components/CakeGallery";
 export const metadata: Metadata = {
   title: "Cake Gallery",
   description:
-    "Browse every cake we bake — celebration cakes and cupcakes — then tap any treat for a closer look. Lagos, Nigeria.",
+    "Browse every cake we bake — celebration cakes and cupcakes — then tap any treat for a closer look. Nigeria.",
 };
 
 export default function CakeGalleryPage() {

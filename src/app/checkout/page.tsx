@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useCart } from "@/store/cart";
 import { saveOrder } from "@/lib/orders";
+import { whatsappLink, CONTACT } from "@/lib/contact";
 import { ngn } from "@/lib/format";
 import { cn } from "@/lib/utils";
 
@@ -13,6 +14,7 @@ export default function CheckoutPage() {
   const { items, subtotal, clear, hydrated } = useCart();
   const [stage, setStage] = useState<Stage>("form");
   const [orderNo, setOrderNo] = useState("");
+  const [waHref, setWaHref] = useState("");
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [mode, setMode] = useState<"delivery" | "pickup">("delivery");
@@ -122,6 +124,18 @@ export default function CheckoutPage() {
     setErrorField(null);
 
     const no = `DC-${Date.now().toString(36).toUpperCase().slice(-6)}`;
+    const itemLines = items
+      .map((it) => `• ${it.qty}× ${it.name} — ${ngn(it.qty * it.unitPrice)}`)
+      .join("\n");
+    setWaHref(
+      whatsappLink(
+        `Hi ${CONTACT.businessName}! I just placed order ${no}.\n\n` +
+          `Name: ${name}\nPhone: ${phone}\n` +
+          `${mode === "delivery" ? `Delivery to: ${address}` : "Pickup"}\nDate: ${date}\n` +
+          (notes.trim() ? `Notes: ${notes}\n` : "") +
+          `\n${itemLines}\nSubtotal: ${ngn(subtotal)}`
+      )
+    );
     try {
       saveOrder({
         no,
@@ -168,6 +182,16 @@ export default function CheckoutPage() {
           kitchen.
         </p>
         <div className="mt-6 flex flex-wrap justify-center gap-3">
+          {waHref && (
+            <a
+              href={waHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="min-h-[52px] rounded-full bg-[#25D366] px-8 py-3 font-display text-lg font-black text-white transition hover:brightness-95 active:scale-95"
+            >
+              Send order on WhatsApp
+            </a>
+          )}
           <Link
             href="/build"
             className="min-h-[52px] rounded-full bg-ember px-8 py-3 font-display text-lg font-black text-white transition hover:bg-ember-deep active:scale-95"
@@ -283,7 +307,7 @@ export default function CheckoutPage() {
                 required
                 value={address}
                 onChange={(e) => { setAddress(e.target.value); if (errorField === "address") setError(""); }}
-                placeholder="Street, area, Lagos + landmark"
+                placeholder="Street, area, Nigeria + landmark"
                 rows={2}
                 aria-invalid={errorField === "address"}
                 aria-describedby={errorField === "address" ? "co-error" : undefined}

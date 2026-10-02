@@ -150,7 +150,7 @@ export default function OrdersPage() {
                     <dd className="min-w-0 flex-1 font-semibold">
                       {order.mode === "delivery"
                         ? order.address || "—"
-                        : "At our Lagos kitchen"}
+                        : "At our kitchen"}
                     </dd>
                   </div>
                   <div className="flex gap-2">

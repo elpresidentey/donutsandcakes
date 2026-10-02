@@ -161,7 +161,7 @@ export default function ProductDetail({ product }: { product: Product }) {
             </div>
 
             <dl className="mt-6 grid grid-cols-3 gap-2 text-center text-xs font-bold text-choco/70">
-              <div className="rounded-2xl bg-sand p-3">🚚<dt className="sr-only">Delivery</dt><dd className="mt-1">Lagos delivery Tue–Sun</dd></div>
+              <div className="rounded-2xl bg-sand p-3">🚚<dt className="sr-only">Delivery</dt><dd className="mt-1">Nationwide delivery Tue–Sun</dd></div>
               <div className="rounded-2xl bg-mint/60 p-3">🌱<dt className="sr-only">Fresh</dt><dd className="mt-1">Baked & blended fresh</dd></div>
               <div className="rounded-2xl bg-butter/60 p-3">🎁<dt className="sr-only">Gifting</dt><dd className="mt-1">Gift wrap available</dd></div>
             </dl>

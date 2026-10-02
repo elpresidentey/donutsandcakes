@@ -5,7 +5,7 @@
  */
 export const CONTACT = {
   businessName: "Donuts & Cakes",
-  area: "Lagos, Nigeria",
+  area: "Nigeria",
   phoneDisplay: "+234 803 000 0000",
   phoneTel: "+2348030000000",
   /** Digits only, no leading +, for wa.me links. */
@@ -18,7 +18,7 @@ export const CONTACT = {
     { days: "Monday", time: "Closed · we rest the ovens" },
   ],
   deliveryNote:
-    "We deliver across Lagos. Free over ₦50,000 — otherwise we quote the exact fee on your confirmation call, never a surprise.",
+    "We deliver nationwide. Free over ₦50,000 — otherwise we quote the exact fee on your confirmation call, never a surprise.",
   leadNote:
     "Ready-made treats need a day's notice. Custom cakes are baked to order, so give us 48 hours.",
 } as const;

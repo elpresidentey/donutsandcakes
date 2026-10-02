@@ -1,10 +1,10 @@
 /* Donuts & Cakes service worker — app-shell + image caching, network-first pages. */
-const STATIC_CACHE = "dc-static-v1";
+const STATIC_CACHE = "dc-static-v2";
 const IMAGE_CACHE = "dc-images-v1";
 
 self.addEventListener("install", (event) => {
   event.waitUntil(
-    caches.open(STATIC_CACHE).then((cache) => cache.addAll(["/", "/manifest.webmanifest"])).catch(() => undefined)
+    caches.open(STATIC_CACHE).then((cache) => cache.addAll(["/", "/manifest.webmanifest", "/offline.html"])).catch(() => undefined)
   );
   self.skipWaiting();
 });
@@ -57,8 +57,7 @@ self.addEventListener("fetch", (event) => {
           }
           return res;
         })
-        .catch(() =>
-          caches.match(request).then((cached) => cached ?? caches.match("/"))
+        .catch(() => (request.mode === 'navigate' ? caches.match('/offline.html') : caches.match(request).then((cached) => cached ?? caches.match('/')))
         )
     );
   }
