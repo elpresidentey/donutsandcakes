@@ -47,3 +47,5 @@ next-env.d.ts
 /*.ps1
 /public/top.html
 
+
+.vercel
