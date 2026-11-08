@@ -3,6 +3,7 @@
 import { Suspense, useMemo, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useCart } from "@/store/cart";
+import { IMAGES } from "@/lib/images";
 import {
   SMOOTHIE_BASES,
   SMOOTHIE_BASE_PRICE,
@@ -11,6 +12,7 @@ import {
   SMOOTHIE_SIZES,
 } from "@/lib/catalog";
 import { BuilderLayout, MultiPicker, SinglePicker, Step } from "@/components/builder";
+import PreviewStage from "@/components/PreviewStage";
 import SmoothiePreview from "@/components/SmoothiePreview";
 
 interface SmoothieConfig {
@@ -98,14 +100,18 @@ function SmoothieBuilderForm() {
     <BuilderLayout
       eyebrow={editKey ? "Smoothie studio · editing" : "Studio 03 · Smoothie builder"}
       title={editKey ? "Tweak your blend" : "Build your blend"}
-      intro="Real fruit, real colour. Add fruits and watch the glass change."
+      intro="Choose your size, base and fruit. Your blend updates as you go."
+      cover={IMAGES.heroSmoothie}
+      stepCount={5}
       preview={
-        <div
-          key={`${size}|${base}|${fruits.join(",")}|${extras.join(",")}`}
-          className="animate-preview-pop"
-        >
-          <SmoothiePreview baseSwatch={baseSwatch} fruits={fruits} extras={extras} size={size} />
-        </div>
+        <PreviewStage model={{ kind: "smoothie", size, baseSwatch, fruits, extras }}>
+          <div
+            key={`${size}|${base}|${fruits.join(",")}|${extras.join(",")}`}
+            className="animate-preview-pop"
+          >
+            <SmoothiePreview baseSwatch={baseSwatch} fruits={fruits} extras={extras} size={size} />
+          </div>
+        </PreviewStage>
       }
       previewLabel={
         fruits.length > 0
@@ -115,6 +121,7 @@ function SmoothieBuilderForm() {
       total={total}
       cta={editKey ? "Update cart" : "Add to cart"}
       onAdd={handleAdd}
+      canAdd={valid}
     >
       <div className="mb-6">
         <button

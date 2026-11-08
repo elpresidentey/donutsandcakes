@@ -3,6 +3,7 @@
 import { Suspense, useMemo, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useCart } from "@/store/cart";
+import { IMAGES } from "@/lib/images";
 import {
   CAKE_BASE,
   CAKE_FILLINGS,
@@ -13,6 +14,7 @@ import {
   CAKE_TOPPINGS,
 } from "@/lib/catalog";
 import { BuilderLayout, MultiPicker, SinglePicker, Step } from "@/components/builder";
+import PreviewStage from "@/components/PreviewStage";
 import CakePreview from "@/components/CakePreview";
 
 interface CakeConfig {
@@ -80,6 +82,13 @@ function CakeBuilderForm() {
 
   const sponge = CAKE_FLAVOURS.find((f) => f.value === flavour)?.swatch ?? "#f6e3b4";
   const frostSwatch = CAKE_FROSTINGS.find((f) => f.value === frosting)?.swatch ?? "#fff3e0";
+  const fillingSwatch: string = {
+    "Chocolate ganache": "#4a2a1a",
+    "Strawberry jam": "#d83a52",
+    Caramel: "#c07a1e",
+    "Cream cheese": "#fdf3e0",
+    "Lemon curd": "#f0cf4a",
+  }[filling] ?? "#f7f2e8";
 
   const summary = `${shape} ${flavour} cake, ${size}, ${frosting.toLowerCase()} frosting`;
 
@@ -126,24 +135,55 @@ function CakeBuilderForm() {
     <BuilderLayout
       eyebrow={editKey ? "Cake studio · editing" : "Studio 01 · Cake builder"}
       title={editKey ? "Tweak your cake" : "Build your cake"}
-      intro="Every tap redraws your cake and updates the price. Play as long as you like — the best ones never get rushed."
+      intro="Choose each detail and watch your cake take shape with live pricing."
+      cover={IMAGES.heroCake}
+      stepCount={8}
       preview={
-        <div
-          key={`${shape}|${size}|${sponge}|${frostSwatch}|${frosting}|${filling}|${toppings.join(",")}`}
-          className="animate-preview-pop"
+        <PreviewStage
+          model={{
+            kind: "cake",
+            shape,
+            size,
+            sponge,
+            frosting: frostSwatch,
+            filling,
+            toppings,
+            inscription,
+            gold,
+          }}
+          sliceContent={
+            <div className="flex items-center gap-4">
+              <div aria-hidden className="w-20 shrink-0 overflow-hidden rounded-lg border border-choco/10 shadow-sm">
+                <div className="h-2.5" style={{ background: frostSwatch }} />
+                <div className="h-5" style={{ background: sponge }} />
+                {filling !== "None" && <div className="h-1.5" style={{ background: fillingSwatch }} />}
+                <div className="h-5" style={{ background: sponge }} />
+                <div className="h-2.5" style={{ background: frostSwatch }} />
+              </div>
+              <div>
+                <p className="text-[10px] font-extrabold uppercase tracking-[0.15em] text-ember">Slice view</p>
+                <p className="mt-1 text-sm font-bold">{flavour} sponge{filling !== "None" ? ` · ${filling}` : " · no filling"}</p>
+              </div>
+            </div>
+          }
         >
-          <CakePreview
-            shape={shape}
-            size={size}
-            sponge={sponge}
-            frosting={frostSwatch}
-            frostingKind={frosting}
-            filling={filling}
-            toppings={toppings}
-            inscription={inscription}
-            gold={gold}
-          />
-        </div>
+          <div
+            key={`${shape}|${size}|${sponge}|${frostSwatch}|${frosting}|${filling}|${toppings.join(",")}`}
+            className="animate-preview-pop"
+          >
+            <CakePreview
+              shape={shape}
+              size={size}
+              sponge={sponge}
+              frosting={frostSwatch}
+              frostingKind={frosting}
+              filling={filling}
+              toppings={toppings}
+              inscription={inscription}
+              gold={gold}
+            />
+          </div>
+        </PreviewStage>
       }
       previewLabel={summary}
       total={total}

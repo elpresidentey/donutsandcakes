@@ -8,6 +8,7 @@ import SiteFooter from "@/components/SiteFooter";
 import PwaRegister from "@/components/PwaRegister";
 import SprinkleBurst from "@/components/SprinkleBurst";
 import InstallPrompt from "@/components/InstallPrompt";
+import { CONTACT } from "@/lib/contact";
 
 /* Self-hosted at build time — no runtime call to fonts.googleapis.com, so type
    renders identically on a cold cache, a slow connection or offline.
@@ -51,6 +52,46 @@ export const metadata: Metadata = {
     ],
     apple: [{ url: "/icons/icon-192.png", sizes: "192x192" }],
   },
+  openGraph: {
+    type: "website",
+    locale: "en_NG",
+    url: "https://donutsandcakes.ng",
+    siteName: "Donuts & Cakes",
+    title: "Donuts & Cakes — Build Your Dessert",
+    description:
+      "A premium Nigerian dessert studio. Build your own cakes, donut boxes and smoothies — or shop ready-made treats, natural juices and more.",
+    images: [
+      {
+        url: "/icons/icon-512.png",
+        width: 512,
+        height: 512,
+        alt: "Donuts & Cakes",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Donuts & Cakes — Build Your Dessert",
+    description:
+      "A premium Nigerian dessert studio. Build your own cakes, donut boxes and smoothies — or shop ready-made treats, natural juices and more.",
+    images: ["/icons/icon-512.png"],
+    creator: "@donutsandcakes",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  verification: {
+    google: "google-site-verification-code",
+  },
+  category: "Food & Drink",
 };
 
 export const viewport: Viewport = {
@@ -66,11 +107,51 @@ export const viewport: Viewport = {
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FoodEstablishment",
+    name: "Donuts & Cakes",
+    description:
+      "A premium Nigerian dessert studio. Build your own cakes, donut boxes and smoothies — or shop ready-made treats, natural juices and more.",
+    url: "https://donutsandcakes.ng",
+    telephone: CONTACT.phoneTel,
+    email: CONTACT.email,
+    address: {
+      "@type": "PostalAddress",
+      addressCountry: "NG",
+      addressRegion: "Nigeria",
+    },
+    sameAs: [CONTACT.instagramUrl],
+    priceRange: "₦₦",
+    servesCuisine: "Desserts",
+    openingHoursSpecification: [
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: ["Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+        opens: "09:00",
+        closes: "20:00",
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: "Monday",
+        opens: "00:00",
+        closes: "00:00",
+        validFrom: "2024-01-01",
+        validThrough: "2024-12-31",
+      },
+    ],
+  };
+
   return (
-    <html
-      lang="en-NG"
-      className={`${fraunces.variable} ${instrumentSans.variable}`}
-    >
+    <html lang="en-NG" className={`${fraunces.variable} ${instrumentSans.variable}`}>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+        <link rel="preconnect" href="https://images.pexels.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://images.pexels.com" />
+      </head>
       <body className="antialiased">
         <CartProvider>
           <a

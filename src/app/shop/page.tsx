@@ -4,6 +4,7 @@ import { useMemo, useRef, useState } from "react";
 import { CATEGORIES, PRODUCTS, type Category } from "@/lib/catalog";
 import ProductCard from "@/components/ProductCard";
 import { cn } from "@/lib/utils";
+import { WithProductGridSkeleton } from "@/components/LoadingWrapper";
 
 type Filter = Category | "all";
 type Sort = "featured" | "price-asc" | "price-desc" | "name-asc";
@@ -35,7 +36,7 @@ function searchable(p: (typeof PRODUCTS)[number]): string {
     .toLowerCase();
 }
 
-export default function ShopPage() {
+function ShopPageContent() {
   const [filter, setFilter] = useState<Filter>("all");
   const [query, setQuery] = useState("");
   const [sort, setSort] = useState<Sort>("featured");
@@ -227,5 +228,13 @@ export default function ShopPage() {
         )}
       </div>
     </div>
+  );
+}
+
+export default function ShopPage() {
+  return (
+    <WithProductGridSkeleton>
+      <ShopPageContent />
+    </WithProductGridSkeleton>
   );
 }

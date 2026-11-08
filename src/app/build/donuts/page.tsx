@@ -3,6 +3,7 @@
 import { Suspense, useMemo, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useCart } from "@/store/cart";
+import { IMAGES } from "@/lib/images";
 import {
   DONUT_BOXES,
   DONUT_BOX_BASE,
@@ -11,6 +12,7 @@ import {
   DONUT_TOPPINGS,
 } from "@/lib/catalog";
 import { BuilderLayout, MultiPicker, SinglePicker, Step } from "@/components/builder";
+import PreviewStage from "@/components/PreviewStage";
 import DonutBoxPreview from "@/components/DonutBoxPreview";
 import { cn } from "@/lib/utils";
 
@@ -114,18 +116,22 @@ function DonutBuilderForm() {
     <BuilderLayout
       eyebrow={editKey ? "Donut studio · editing" : "Studio 02 · Donut box builder"}
       title={editKey ? "Tweak your box" : "Build your donut box"}
-      intro="Tap a slot, then tap a flavour to fill it. Build a box that says something — or hand it to surprise me and let us decide."
+      intro="Choose a flavour for each donut, then finish the box with glaze and toppings."
+      cover={IMAGES.heroDonuts}
+      stepCount={5}
       preview={
-        <div
-          key={`${box}|${glaze}|${toppings.join(",")}|${sizedSlots.join(",")}`}
-          className="animate-preview-pop"
-        >
-          <DonutBoxPreview
-            slots={sizedSlots.map((flavour) => ({ flavour }))}
-            glaze={glaze}
-            toppings={toppings}
-          />
-        </div>
+        <PreviewStage model={{ kind: "donut", slots: sizedSlots, glaze, toppings }}>
+          <div
+            key={`${box}|${glaze}|${toppings.join(",")}|${sizedSlots.join(",")}`}
+            className="animate-preview-pop"
+          >
+            <DonutBoxPreview
+              slots={sizedSlots.map((flavour) => ({ flavour }))}
+              glaze={glaze}
+              toppings={toppings}
+            />
+          </div>
+        </PreviewStage>
       }
       previewLabel={`Box of ${count}: ${flavourCounts}`}
       total={total}
@@ -149,12 +155,19 @@ function DonutBuilderForm() {
                 aria-label={`Slot ${i + 1}: ${f}. Select to change.`}
                 title={`Slot ${i + 1}: ${f}`}
                 className={cn(
-                  "flex aspect-square min-h-[52px] flex-col items-center justify-center rounded-2xl border-2 transition active:scale-95",
+                  "relative grid aspect-square min-h-[52px] place-items-center rounded-2xl border-2 bg-sand transition active:scale-95",
                   i === active ? "border-ember shadow-[0_4px_14px_rgba(143,44,7,0.3)]" : "border-choco/15 hover:border-choco/40"
                 )}
-                style={{ background: swatch }}
               >
-                <span className="rounded-full bg-cocoa/70 px-1.5 text-[10px] font-black text-cream">{i + 1}</span>
+                <span
+                  aria-hidden
+                  className="relative grid h-[72%] w-[72%] place-items-center rounded-full shadow-[inset_-5px_-7px_10px_rgba(43,28,21,0.25),inset_3px_3px_8px_rgba(255,255,255,0.65),0_4px_7px_rgba(43,28,21,0.18)]"
+                  style={{
+                    background: `radial-gradient(circle at 50% 50%, #fffdfa 0 15%, #6f432e 16% 24%, transparent 25%), radial-gradient(circle at 30% 25%, rgba(255,255,255,.8), transparent 40%), linear-gradient(145deg, ${swatch}, ${swatch} 62%, #70452d)`,
+                  }}
+                >
+                  <span className="absolute -right-1 -top-1 rounded-full bg-cocoa px-1.5 py-0.5 text-[9px] font-black leading-none text-cream">{i + 1}</span>
+                </span>
               </button>
             );
           })}

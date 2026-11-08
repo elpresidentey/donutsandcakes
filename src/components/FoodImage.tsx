@@ -54,6 +54,8 @@ export default function FoodImage({
     );
   }
 
+  // Avoid relying on a server-side fetch for curated Pexels photos. Loading the
+  // source directly lets the visitor's browser request the image itself.
   return (
     <Image
       src={px(id, width)}
@@ -61,6 +63,7 @@ export default function FoodImage({
       width={width}
       height={Math.round((width * 3) / 4)}
       sizes={sizes}
+      unoptimized
       priority={priority}
       placeholder="blur"
       blurDataURL={BLUR}

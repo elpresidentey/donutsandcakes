@@ -1,15 +1,21 @@
 "use client";
 
 import Link from "next/link";
+import { useState, useRef, useEffect } from "react";
 import { useCart } from "@/store/cart";
 import { ngn } from "@/lib/format";
 import { CATEGORIES, type Product } from "@/lib/catalog";
 import FoodImage from "./FoodImage";
+import { cn } from "@/lib/utils";
 
 const MAX_CHIPS = 3;
 
 export default function ProductCard({ product }: { product: Product }) {
   const { addItem } = useCart();
+  const [added, setAdded] = useState(false);
+  const [adding, setAdding] = useState(false);
+  const [hovered, setHovered] = useState(false);
+  const buttonRef = useRef<HTMLButtonElement>(null);
   // Keep quick-add consistent with the product page default selection.
   const defaultIdx =
     product.category === "cakes" && product.sizes.length > 1 ? 1 : 0;
@@ -22,10 +28,46 @@ export default function ProductCard({ product }: { product: Product }) {
   const ingredients = product.ingredients.slice(0, MAX_CHIPS);
   const moreCount = product.ingredients.length - ingredients.length;
 
+  // Reset added state after animation
+  useEffect(() => {
+    if (added) {
+      const timer = setTimeout(() => {
+        setAdded(false);
+        setAdding(false);
+      }, 2000);
+      return () => clearTimeout(timer);
+    }
+  }, [added]);
+
+  // Focus management after quick-add
+  const handleQuickAdd = () => {
+    setAdding(true);
+    setAdded(true);
+    addItem({
+      kind: "ready",
+      name: product.name,
+      imageId: product.image.id,
+      imageAlt: product.image.alt,
+      unitPrice: quickPrice,
+      details: [defaultSize?.label ?? "Standard"],
+    });
+    // Refocus button for keyboard users after animation
+    setTimeout(() => {
+      buttonRef.current?.focus();
+    }, 2100);
+  };
+
   // `relative` on the article anchors the title link's stretched hit area; the
   // quick-add button is lifted above it with z-10 so it stays clickable.
   return (
-    <article className="group relative flex flex-col overflow-hidden rounded-2xl border border-choco/12 bg-milk transition-all duration-300 hover:-translate-y-1 hover:border-choco/25 hover:shadow-[0_16px_34px_rgba(43,28,21,0.12)]">
+    <article
+      className={cn(
+        "group relative flex flex-col overflow-hidden rounded-2xl border border-choco/12 bg-milk transition-all duration-300",
+        "hover:-translate-y-1 hover:border-choco/25 hover:shadow-[0_16px_34px_rgba(43,28,21,0.12)]"
+      )}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
       {/* The image and the title both pointed at the same URL, so every card cost
           a keyboard user two tab stops to say the same thing. The image is kept as
           a link for mouse users but removed from the tab order and hidden from
@@ -44,15 +86,19 @@ export default function ProductCard({ product }: { product: Product }) {
           className="h-full w-full object-cover transition-transform duration-[600ms] ease-out group-hover:scale-[1.05]"
         />
         {product.badge && (
-          <span className="absolute left-3 top-3 rounded-full bg-cocoa px-3 py-1 text-[11px] font-black uppercase tracking-[0.08em] text-cream">
+          <span className="absolute left-3 top-3 rounded-full bg-cocoa px-3 py-1 text-[11px] font-black uppercase tracking-[0.08em] text-cream transition-opacity duration-200 group-hover:opacity-100">
             {product.badge}
           </span>
+        )}
+        {/* Subtle shine overlay on hover */}
+        {!hovered && (
+          <div className="absolute inset-0 bg-gradient-to-br from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
         )}
       </Link>
 
       <div className="flex flex-1 flex-col p-4">
         <p className="flex items-center gap-1.5 text-[11px] font-black uppercase tracking-[0.14em] text-ember">
-          <span aria-hidden className="h-1.5 w-1.5 shrink-0 rounded-full bg-ember" />
+          <span aria-hidden className="h-1.5 w-1.5 shrink-0 rounded-full bg-ember animate-pulse motion-reduce:animate-none" />
           {categoryName}
           {product.serves && (
             <span className="text-choco/55">· {product.serves}</span>
@@ -61,7 +107,7 @@ export default function ProductCard({ product }: { product: Product }) {
 
         <Link
           href={`/product/${product.id}`}
-          className="mt-1.5 self-start after:absolute after:inset-0 after:content-['']"
+          className="mt-1.5 self-start after:absolute after:inset-0 after:content-[''] focus:outline-none focus-visible:ring-2 focus-visible:ring-ember focus-visible:ring-offset-2 focus-visible:ring-offset-milk rounded-lg"
         >
           <h3 className="line-clamp-2 font-display text-subhead transition-colors group-hover:text-ember">
             {product.name}
@@ -85,7 +131,7 @@ export default function ProductCard({ product }: { product: Product }) {
             <span
               key={item}
               aria-hidden
-              className="rounded-full px-2.5 py-0.5 text-[11px] font-semibold text-choco/75 ring-1 ring-inset ring-choco/15"
+              className="rounded-full px-2.5 py-0.5 text-[11px] font-semibold text-choco/75 ring-1 ring-inset ring-choco/15 transition-transform hover:scale-105"
             >
               {item}
             </span>
@@ -125,21 +171,24 @@ export default function ProductCard({ product }: { product: Product }) {
               )}
             </div>
             <button
+              ref={buttonRef}
               type="button"
-              onClick={() =>
-                addItem({
-                  kind: "ready",
-                  name: product.name,
-                  imageId: product.image.id,
-                  imageAlt: product.image.alt,
-                  unitPrice: quickPrice,
-                  details: [defaultSize?.label ?? "Standard"],
-                })
-              }
-              className="relative z-10 min-h-[44px] w-full shrink-0 rounded-full bg-ember px-3.5 py-2 text-sm font-bold text-white transition hover:bg-ember-deep active:scale-95 min-[520px]:w-auto"
-              aria-label={`Quick add ${product.name} to cart`}
+              onClick={handleQuickAdd}
+              disabled={adding}
+              className={cn(
+                "relative z-10 min-h-[44px] w-full shrink-0 rounded-full px-3.5 py-2 text-sm font-bold text-white transition active:scale-95 min-[520px]:w-auto",
+                adding
+                  ? "bg-mint cursor-wait"
+                  : added
+                  ? "bg-mint"
+                  : "bg-ember hover:bg-ember-deep hover:-translate-y-0.5 hover:shadow-[0_4px_14px_rgba(143,44,7,0.3)]"
+              )}
+              aria-label={added ? `${product.name} added to cart` : `Quick add ${product.name} to cart`}
+              aria-live="polite"
             >
-              + Add
+              {adding && <span className="inline-flex items-center gap-1.5"><svg className="animate-spin h-4 w-4" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none"/><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"/></svg>Adding…</span>}
+              {added && <span className="inline-flex items-center gap-1.5 animate-pop">✓ Added</span>}
+              {!adding && !added && <span className="transition-transform hover:scale-105">+ Add</span>}
             </button>
           </div>
         </div>

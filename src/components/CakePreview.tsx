@@ -1,6 +1,7 @@
 "use client";
 
 import { lighten, mixHex } from "@/lib/color";
+import { cn } from "@/lib/utils";
 
 export interface CakePreviewProps {
   shape: string; // round | square | heart
@@ -197,6 +198,7 @@ export default function CakePreview({
   const r = R * (SIZE_SCALE[size] ?? 1);
   const text = inscription.trim();
   const pipeColour = lighten(top, 0.3);
+
 
   return (
     <svg

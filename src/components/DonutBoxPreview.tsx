@@ -2,6 +2,7 @@
 
 import { DONUT_FLAVOURS } from "@/lib/catalog";
 import { mixHex } from "@/lib/color";
+import { cn } from "@/lib/utils";
 
 export interface DonutSlot {
   flavour: string;
@@ -41,8 +42,9 @@ function Donut({
   const glazeFill = swatchFor(flavour);
   const ring = GLAZE_RING[glaze] ?? "#ffffff";
   const gid = `dg-${seed}`;
+  const key = `${x}|${y}|${r}|${flavour}|${glaze}|${toppings.join(",")}|${seed}`;
   return (
-    <g>
+    <g key={key}>
       <defs>
         {/* Dough bakes unevenly: warm at the rim, paler where it catches light. */}
         <radialGradient id={`dough-${seed}`} cx="0.35" cy="0.3" r="0.8">
@@ -91,7 +93,7 @@ function Donut({
         opacity="0.9"
       />
       {/* hole with an inner shadow so it looks punched, not painted */}
-      <circle cx={x} cy={x === 0 ? 0 : y} r={r * 0.28} fill="#fffdfa" stroke="#2b1c15" strokeWidth="2.5" />
+      <circle cx={x} cy={y} r={r * 0.28} fill="#fffdfa" stroke="#2b1c15" strokeWidth="2.5" />
       <path
         d={`M${x - r * 0.26} ${y - r * 0.1} a${r * 0.28} ${r * 0.28} 0 0 1 ${r * 0.52} 0`}
         fill="none"
@@ -109,7 +111,7 @@ function Donut({
           const sy = y + Math.sin(a) * rr;
           return (
             <line
-              key={i}
+              key={`sprinkle-${seed}-${i}`}
               x1={sx}
               y1={sy}
               x2={sx + 6}
@@ -124,7 +126,7 @@ function Donut({
         Array.from({ length: 5 }).map((_, i) => {
           const a = ((seed * 91 + i * 77) % 360) * (Math.PI / 180);
           return (
-            <circle key={i} cx={x + Math.cos(a) * r * 0.55} cy={y + Math.sin(a) * r * 0.55} r={2.6} fill="#a06a35" />
+            <circle key={`nut-${seed}-${i}`} cx={x + Math.cos(a) * r * 0.55} cy={y + Math.sin(a) * r * 0.55} r={2.6} fill="#a06a35" />
           );
         })}
       {toppings.includes("Oreo crumbs") &&
@@ -132,7 +134,7 @@ function Donut({
           const a = ((seed * 53 + i * 97) % 360) * (Math.PI / 180);
           return (
             <rect
-              key={i}
+              key={`oreo-${seed}-${i}`}
               x={x + Math.cos(a) * r * 0.55}
               y={y + Math.sin(a) * r * 0.55}
               width={6}
@@ -146,21 +148,21 @@ function Donut({
         Array.from({ length: 5 }).map((_, i) => {
           const a = ((seed * 71 + i * 61) % 360) * (Math.PI / 180);
           return (
-            <circle key={i} cx={x + Math.cos(a) * r * 0.5} cy={y + Math.sin(a) * r * 0.5} r={2.2} fill="#ffffff" />
+            <circle key={`coconut-${seed}-${i}`} cx={x + Math.cos(a) * r * 0.5} cy={y + Math.sin(a) * r * 0.5} r={2.2} fill="#ffffff" />
           );
         })}
       {toppings.includes("Choc chips") &&
         Array.from({ length: 4 }).map((_, i) => {
           const a = ((seed * 41 + i * 83) % 360) * (Math.PI / 180);
           return (
-            <circle key={i} cx={x + Math.cos(a) * r * 0.6} cy={y + Math.sin(a) * r * 0.6} r={2.8} fill="#4a2a1a" />
+            <circle key={`chocchip-${seed}-${i}`} cx={x + Math.cos(a) * r * 0.6} cy={y + Math.sin(a) * r * 0.6} r={2.8} fill="#4a2a1a" />
           );
         })}
       {toppings.includes("Dried berries") &&
         [0, 1, 2].map((i) => {
           const a = ((seed * 29 + i * 120) % 360) * (Math.PI / 180);
           return (
-            <circle key={i} cx={x + Math.cos(a) * r * 0.55} cy={y + Math.sin(a) * r * 0.55} r={3.4} fill="#6d2148" />
+            <circle key={`berry-${seed}-${i}`} cx={x + Math.cos(a) * r * 0.55} cy={y + Math.sin(a) * r * 0.55} r={3.4} fill="#6d2148" />
           );
         })}
     </g>

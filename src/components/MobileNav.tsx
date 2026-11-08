@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useCart } from "@/store/cart";
 import { cn } from "@/lib/utils";
+import { useEffect, useRef, useState } from "react";
 
 const TABS = [
   {
@@ -39,27 +40,53 @@ const TABS = [
 export default function MobileNav() {
   const pathname = usePathname();
   const { count } = useCart();
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+  const navRef = useRef<HTMLElement>(null);
+
+  // Handle swipe to dismiss (swipe down on nav)
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchStart(e.touches[0].clientY);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (touchStart === null) return;
+    const deltaY = e.touches[0].clientY - touchStart;
+    // If swiping down more than 50px, could dismiss - but nav is fixed bottom
+    // This is more for future enhancement
+  };
+
+  const handleTouchEnd = () => {
+    setTouchStart(null);
+  };
 
   return (
     <nav
+      ref={navRef}
       aria-label="Primary mobile"
       className="fixed inset-x-0 bottom-0 z-40 border-t border-choco/10 bg-milk/95 backdrop-blur-md md:hidden"
       style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
     >
-      <ul className="grid grid-cols-4">
+      <ul className="grid grid-cols-4" role="tablist">
         {TABS.map((t) => {
           const active = t.href === "/" ? pathname === "/" : pathname.startsWith(t.href);
           return (
-            <li key={t.href}>
+            <li key={t.href} role="presentation">
               <Link
                 href={t.href}
                 aria-current={active ? "page" : undefined}
+                role="tab"
+                aria-selected={active}
                 className={cn(
                   "relative flex min-h-[64px] flex-col items-center justify-center gap-1 text-[11px] font-bold",
-                  active ? "text-ember" : "text-choco/70"
+                  active ? "text-ember" : "text-choco/70",
+                  "focus:outline-none focus-visible:ring-2 focus-visible:ring-ember focus-visible:ring-offset-2 focus-visible:ring-offset-milk"
                 )}
+                onTouchStart={() => {}} // Prevents 300ms click delay on some mobile browsers
               >
-                <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                <svg viewBox="0 0 24 24" className="h-7 w-7" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden="true">
                   {t.icon}
                 </svg>
                 {t.label}
@@ -71,7 +98,7 @@ export default function MobileNav() {
                 {t.href === "/cart" && count > 0 && (
                   <span
                     aria-hidden="true"
-                    className="absolute right-1/2 top-1 flex h-5 min-w-5 translate-x-5 items-center justify-center rounded-full bg-ember px-1 text-[10px] font-black text-white"
+                    className="absolute right-1/2 top-1 flex h-5 min-w-5 translate-x-5 items-center justify-center rounded-full bg-ember px-1 text-[10px] font-black text-white animate-pop"
                   >
                     {count}
                   </span>
