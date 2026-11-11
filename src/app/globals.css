@@ -2,17 +2,59 @@
 
 html[data-theme="dark"] {
   color-scheme: dark;
-  --color-cream: #17130f;
+  --color-cream: #f4e9d8;
   --color-milk: #211b16;
   --color-sand: #30271f;
   --color-choco: #f4e9d8;
   --color-cocoa: #100d0a;
-  --color-ember: #f07848;
-  --color-ember-deep: #ff9a71;
-  --color-butter: #503b20;
+  --color-ember: #ff986f;
+  --color-ember-deep: #ffb192;
+  --color-butter: #ffd68d;
   --color-honey: #ffd17a;
-  --color-mint: #294332;
+  --color-mint: #a4dfb5;
   --color-leaf: #8bd4a3;
+}
+
+html[data-theme="dark"] body {
+  background-color: #17130f;
+  color: #f4e9d8;
+}
+
+html[data-theme="dark"] [class~="bg-cream"],
+html[data-theme="dark"] [class~="bg-cream/60"],
+html[data-theme="dark"] [class~="bg-cream/80"],
+html[data-theme="dark"] [class~="bg-cream/90"],
+html[data-theme="dark"] [class~="bg-cream/95"] {
+  background-color: #17130f;
+}
+
+html[data-theme="dark"] [class~="bg-choco"],
+html[data-theme="dark"] [class~="bg-choco/95"] {
+  background-color: #30271f;
+}
+
+html[data-theme="dark"] [class~="bg-ember"] {
+  background-color: #a83c14;
+}
+
+html[data-theme="dark"] [class~="bg-ember-deep"] {
+  background-color: #87300f;
+}
+
+html[data-theme="dark"] [class~="bg-leaf"] {
+  background-color: #235b38;
+}
+
+html[data-theme="dark"] [class~="bg-mint"],
+html[data-theme="dark"] [class~="bg-mint/40"],
+html[data-theme="dark"] [class~="bg-mint/60"] {
+  background-color: #253b2d;
+}
+
+html[data-theme="dark"] [class~="bg-butter/40"],
+html[data-theme="dark"] [class~="bg-butter/50"],
+html[data-theme="dark"] [class~="bg-butter/60"] {
+  background-color: #40351f;
 }
 
 html[data-theme="dark"] .bg-white {
