@@ -34,6 +34,39 @@ export default function InstallPrompt() {
     return () => window.removeEventListener("beforeinstallprompt", onBeforeInstall);
   }, []);
 
+  useEffect(() => {
+    const onInstallRequest = async (event: Event) => {
+      const report = (event as CustomEvent<{ report?: (message: string) => void }>).detail?.report;
+      if (deferred) {
+        try {
+          await deferred.prompt();
+          const choice = await deferred.userChoice;
+          if (choice.outcome === "accepted") {
+            report?.("App installed. You can open it from your home screen.");
+            setDismissed(true);
+            localStorage.setItem("dc-install-dismissed", "1");
+          } else {
+            report?.("Install was cancelled. You can try again whenever you’re ready.");
+          }
+        } catch {
+          report?.("Your browser couldn’t open the install prompt. Try its menu and choose Install app.");
+        }
+        return;
+      }
+
+      if (showIOS) {
+        setDismissed(false);
+        report?.("Use Share, then choose “Add to Home Screen” to install.");
+        return;
+      }
+
+      report?.("Open your browser menu and choose “Install app” or “Add to Home Screen.”");
+    };
+
+    window.addEventListener("dc:install-app", onInstallRequest);
+    return () => window.removeEventListener("dc:install-app", onInstallRequest);
+  }, [deferred, showIOS]);
+
   const dismiss = () => {
     localStorage.setItem("dc-install-dismissed", "1");
     setDismissed(true);

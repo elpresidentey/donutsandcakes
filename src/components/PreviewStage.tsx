@@ -1,7 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { useEffect, useRef, useState, type PointerEvent, type ReactNode } from "react";
+import { useRef, useState, type PointerEvent, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
 import type { ProductPreviewModel } from "./product-preview-model";
 

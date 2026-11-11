@@ -144,8 +144,13 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="en-NG" className={`${fraunces.variable} ${instrumentSans.variable}`}>
+    <html lang="en-NG" suppressHydrationWarning className={`${fraunces.variable} ${instrumentSans.variable}`}>
       <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: "try { if (localStorage.getItem('dc-theme') === 'dark') document.documentElement.dataset.theme = 'dark'; } catch {}",
+          }}
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
