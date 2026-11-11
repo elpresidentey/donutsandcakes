@@ -99,27 +99,22 @@ export default function HomePage() {
             <Reveal key={c.href} delay={i * 90}>
               <Link
                 href={c.href}
-                className={`group relative block overflow-hidden rounded-3xl ${c.bg} p-2 ring-1 ring-inset ring-choco/10 transition-transform hover:-translate-y-1`}
+              className={`group relative block overflow-hidden rounded-[1.75rem] ${c.bg} shadow-[0_8px_28px_rgba(43,28,21,0.08)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_38px_rgba(43,28,21,0.16)]`}
               >
-                <div className="overflow-hidden rounded-[1.3rem]">
+                <div className="relative overflow-hidden">
                   <FoodImage
                     id={c.image.id}
                     alt={c.image.alt}
                     width={700}
                     sizes="(max-width: 640px) 100vw, 33vw"
-                    className="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    className="scroll-drift aspect-[4/3] w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.06]"
                   />
-                </div>
-                <div className="flex items-center justify-between px-3 py-3">
-                  <div>
-                    <h3 className="font-display text-2xl font-black">
-                      {c.name}
-                    </h3>
-                    <p className="text-sm font-semibold text-choco/70">{c.text}</p>
+                  <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-cocoa/85 via-cocoa/10 to-transparent" />
+                  <span aria-hidden className="absolute bottom-5 right-5 grid h-11 w-11 place-items-center rounded-full border border-white/35 bg-white/15 text-xl text-white backdrop-blur-sm transition-all group-hover:translate-x-1 group-hover:bg-ember">→</span>
+                  <div className="absolute inset-x-5 bottom-5 pr-14 text-white">
+                    <h3 className="font-display text-2xl font-black leading-tight sm:text-3xl">{c.name}</h3>
+                    <p className="mt-1 text-sm font-semibold text-white/85">{c.text}</p>
                   </div>
-                  <span className="flex h-11 w-11 items-center justify-center rounded-full bg-choco text-xl text-cream transition group-hover:bg-ember" aria-hidden="true">
-                    →
-                  </span>
                 </div>
               </Link>
             </Reveal>

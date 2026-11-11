@@ -14,7 +14,6 @@ export default function ProductCard({ product }: { product: Product }) {
   const { addItem } = useCart();
   const [added, setAdded] = useState(false);
   const [adding, setAdding] = useState(false);
-  const [hovered, setHovered] = useState(false);
   const buttonRef = useRef<HTMLButtonElement>(null);
   // Keep quick-add consistent with the product page default selection.
   const defaultIdx =
@@ -42,7 +41,6 @@ export default function ProductCard({ product }: { product: Product }) {
   // Focus management after quick-add
   const handleQuickAdd = () => {
     setAdding(true);
-    setAdded(true);
     addItem({
       kind: "ready",
       name: product.name,
@@ -51,6 +49,10 @@ export default function ProductCard({ product }: { product: Product }) {
       unitPrice: quickPrice,
       details: [defaultSize?.label ?? "Standard"],
     });
+    setTimeout(() => {
+      setAdding(false);
+      setAdded(true);
+    }, 360);
     // Refocus button for keyboard users after animation
     setTimeout(() => {
       buttonRef.current?.focus();
@@ -62,11 +64,9 @@ export default function ProductCard({ product }: { product: Product }) {
   return (
     <article
       className={cn(
-        "group relative flex flex-col overflow-hidden rounded-2xl border border-choco/12 bg-milk transition-all duration-300",
-        "hover:-translate-y-1 hover:border-choco/25 hover:shadow-[0_16px_34px_rgba(43,28,21,0.12)]"
+        "group relative flex flex-col overflow-hidden rounded-[1.4rem] border border-choco/10 bg-milk transition-all duration-300",
+        "hover:-translate-y-2 hover:border-ember/25 hover:shadow-[0_22px_44px_rgba(43,28,21,0.14)] focus-within:border-ember/60"
       )}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
     >
       {/* The image and the title both pointed at the same URL, so every card cost
           a keyboard user two tab stops to say the same thing. The image is kept as
@@ -91,14 +91,12 @@ export default function ProductCard({ product }: { product: Product }) {
           </span>
         )}
         {/* Subtle shine overlay on hover */}
-        {!hovered && (
-          <div className="absolute inset-0 bg-gradient-to-br from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-        )}
+        <div aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-br from-transparent via-white/15 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
       </Link>
 
-      <div className="flex flex-1 flex-col p-4">
+      <div className="flex flex-1 flex-col p-4 sm:p-5">
         <p className="flex items-center gap-1.5 text-[11px] font-black uppercase tracking-[0.14em] text-ember">
-          <span aria-hidden className="h-1.5 w-1.5 shrink-0 rounded-full bg-ember animate-pulse motion-reduce:animate-none" />
+          <span aria-hidden className="h-1.5 w-1.5 shrink-0 rounded-full bg-ember transition-transform duration-300 group-hover:scale-150" />
           {categoryName}
           {product.serves && (
             <span className="text-choco/55">· {product.serves}</span>
@@ -109,13 +107,13 @@ export default function ProductCard({ product }: { product: Product }) {
           href={`/product/${product.id}`}
           className="mt-1.5 self-start after:absolute after:inset-0 after:content-[''] focus:outline-none focus-visible:ring-2 focus-visible:ring-ember focus-visible:ring-offset-2 focus-visible:ring-offset-milk rounded-lg"
         >
-          <h3 className="line-clamp-2 font-display text-subhead transition-colors group-hover:text-ember">
+          <h3 className="line-clamp-2 font-display text-subhead leading-snug transition-colors group-hover:text-ember">
             {product.name}
           </h3>
         </Link>
 
-        <p className="mt-1.5 line-clamp-2 text-[13px] leading-snug text-choco/70">
-          {product.description}
+        <p className="mt-2 line-clamp-2 min-h-[2.75rem] text-sm font-medium leading-snug text-choco/75">
+          {product.tagline}
         </p>
 
         {/* Ingredients at a glance. The full list stays available to screen
@@ -127,21 +125,21 @@ export default function ProductCard({ product }: { product: Product }) {
           <span className="sr-only">
             Made with: {product.ingredients.join(", ")}
           </span>
-          {ingredients.map((item) => (
+          {ingredients.slice(0, 2).map((item) => (
             <span
               key={item}
               aria-hidden
-              className="rounded-full px-2.5 py-0.5 text-[11px] font-semibold text-choco/75 ring-1 ring-inset ring-choco/15 transition-transform hover:scale-105"
+              className="rounded-full bg-sand/65 px-2.5 py-1 text-[10px] font-bold text-choco/75"
             >
               {item}
             </span>
           ))}
-          {moreCount > 0 && (
+          {ingredients.length > 2 && (
             <span
               aria-hidden
-              className="px-1 py-0.5 text-[11px] font-bold text-ember-deep"
+              className="px-1 py-1 text-[10px] font-bold text-ember-deep"
             >
-              +{moreCount} more
+              +{moreCount + ingredients.length - 2} more
             </span>
           )}
         </div>
@@ -176,7 +174,7 @@ export default function ProductCard({ product }: { product: Product }) {
               onClick={handleQuickAdd}
               disabled={adding}
               className={cn(
-                "relative z-10 min-h-[44px] w-full shrink-0 rounded-full px-3.5 py-2 text-sm font-bold text-white transition active:scale-95 min-[520px]:w-auto",
+                "relative z-10 min-h-[44px] w-full shrink-0 rounded-full px-3.5 py-2 text-sm font-bold text-white transition duration-200 active:scale-90 min-[520px]:w-auto",
                 adding
                   ? "bg-mint cursor-wait"
                   : added
@@ -187,7 +185,7 @@ export default function ProductCard({ product }: { product: Product }) {
               aria-live="polite"
             >
               {adding && <span className="inline-flex items-center gap-1.5"><svg className="animate-spin h-4 w-4" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none"/><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"/></svg>Adding…</span>}
-              {added && <span className="inline-flex items-center gap-1.5 animate-pop">✓ Added</span>}
+              {added && <span className="inline-flex animate-pop items-center gap-1.5"><span aria-hidden className="grid h-4 w-4 place-items-center rounded-full bg-white/20">✓</span> Added</span>}
               {!adding && !added && <span className="transition-transform hover:scale-105">+ Add</span>}
             </button>
           </div>

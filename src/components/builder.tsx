@@ -162,7 +162,7 @@ export function SinglePicker({
             onClick={() => onChange(o.value)}
             onKeyDown={(e) => onKeyDown(e, i)}
             className={cn(
-              "relative flex min-h-[68px] flex-col justify-center gap-1 rounded-xl border px-3 py-3 text-left transition-all duration-200 active:scale-[0.98]",
+              "relative flex min-h-[76px] flex-col justify-center gap-1.5 rounded-2xl border px-3.5 py-3 text-left transition-all duration-200 active:scale-[0.98]",
               active
                 ? "border-ember bg-ember/8 ring-1 ring-ember/25"
                 : "border-choco/12 bg-cream/60 hover:border-choco/35 hover:bg-white"
@@ -171,8 +171,8 @@ export function SinglePicker({
             {active && (
               <span
                 aria-hidden
-                className="absolute right-3 top-3 h-2 w-2 rounded-full bg-ember animate-pop"
-              />
+                className="absolute right-3 top-3 grid h-5 w-5 place-items-center rounded-full bg-ember text-[10px] font-black text-white animate-pop"
+              >✓</span>
             )}
             <span className="flex items-center gap-2.5 pr-5 text-sm font-bold">
               {o.swatch && (
@@ -377,7 +377,7 @@ export function BuilderLayout({
 
         {/* Steps */}
         <BuilderFlowContext.Provider value={flow}>
-          <div className="rounded-[1.75rem] bg-milk px-5 py-5 ring-1 ring-choco/8 sm:px-8 sm:py-7">{children}</div>
+          <div className="rounded-[1.75rem] bg-milk px-5 py-5 shadow-[0_8px_32px_rgba(43,28,21,0.035)] ring-1 ring-choco/8 sm:px-8 sm:py-7">{children}</div>
         </BuilderFlowContext.Provider>
       </div>
 
