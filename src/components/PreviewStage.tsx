@@ -1,7 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { useRef, useState, type PointerEvent, type ReactNode } from "react";
+import { useEffect, useRef, useState, type PointerEvent, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
 import type { ProductPreviewModel } from "./product-preview-model";
 
@@ -20,8 +20,24 @@ export default function PreviewStage({
   const [zoom, setZoom] = useState(1);
   const [spinning, setSpinning] = useState(false);
   const [showInside, setShowInside] = useState(false);
+  const [showSlicePopup, setShowSlicePopup] = useState(false);
   const [webglReady, setWebglReady] = useState(false);
   const drag = useRef<{ id: number; x: number; angle: number } | null>(null);
+  const sliceTimer = useRef<number | null>(null);
+
+  const closeSlice = () => {
+    if (sliceTimer.current !== null) window.clearTimeout(sliceTimer.current);
+    sliceTimer.current = null;
+    setShowSlicePopup(false);
+    setShowInside(false);
+  };
+
+  const openSlice = () => {
+    if (sliceTimer.current !== null) window.clearTimeout(sliceTimer.current);
+    setShowInside(true);
+    setShowSlicePopup(true);
+    sliceTimer.current = window.setTimeout(closeSlice, 2800);
+  };
 
   const startDrag = (event: PointerEvent<HTMLDivElement>) => {
     if (event.button !== 0) return;
@@ -43,7 +59,7 @@ export default function PreviewStage({
     setRotation(-0.08);
     setZoom(1);
     setSpinning(false);
-    setShowInside(false);
+    closeSlice();
   };
 
   return (
@@ -85,9 +101,12 @@ export default function PreviewStage({
         </span>
       </div>
 
-      {sliceContent && showInside && (
-        <div className="absolute inset-x-3 bottom-12 z-10 animate-[fade-up_0.25s_ease-out_both] rounded-2xl border border-choco/10 bg-milk/95 p-4 shadow-xl backdrop-blur sm:inset-x-6">
-          {sliceContent}
+      {sliceContent && showInside && showSlicePopup && (
+        <div role="status" className="absolute right-3 top-3 z-20 animate-[fade-up_0.22s_ease-out_both] rounded-2xl border border-choco/10 bg-milk/95 px-3 py-2.5 shadow-lg backdrop-blur sm:right-5 sm:top-5">
+          <div className="flex items-center gap-3">
+            <div className="min-w-0">{sliceContent}</div>
+            <button type="button" aria-label="Dismiss slice view" onClick={closeSlice} className="grid h-7 w-7 shrink-0 place-items-center rounded-full text-sm font-bold text-choco/50 transition hover:bg-sand hover:text-choco">×</button>
+          </div>
         </div>
       )}
 
@@ -100,7 +119,7 @@ export default function PreviewStage({
             {spinning ? "Pause" : "Spin"}
           </button>
           {sliceContent && (
-            <button type="button" onClick={() => setShowInside((value) => !value)} aria-pressed={showInside} className={cn("min-h-9 rounded-full border px-3 text-xs font-bold transition", showInside ? "border-ember bg-ember text-white" : "border-choco/15 bg-white hover:border-ember hover:text-ember")}>
+            <button type="button" onClick={() => showInside ? closeSlice() : openSlice()} aria-pressed={showInside} className={cn("min-h-9 rounded-full border px-3 text-xs font-bold transition active:scale-95", showInside ? "border-ember bg-ember text-white" : "border-choco/15 bg-white hover:border-ember hover:text-ember")}>
               {showInside ? "Hide inside" : "Slice"}
             </button>
           )}

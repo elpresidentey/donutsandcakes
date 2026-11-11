@@ -211,16 +211,16 @@ function CakeBuilderForm() {
           }}
           sliceContent={
             <div className="flex items-center gap-4">
-              <div aria-hidden className="w-20 shrink-0 overflow-hidden rounded-lg border border-choco/10 shadow-sm">
-                <div className="h-2.5" style={{ background: frostSwatch }} />
-                <div className="h-5" style={{ background: sponge }} />
-                {filling !== "None" && <div className="h-1.5" style={{ background: fillingSwatch }} />}
-                <div className="h-5" style={{ background: sponge }} />
-                <div className="h-2.5" style={{ background: frostSwatch }} />
+              <div aria-hidden className="w-14 shrink-0 overflow-hidden rounded-lg border border-choco/10 shadow-sm">
+                <div className="h-2" style={{ background: frostSwatch }} />
+                <div className="h-3.5" style={{ background: sponge }} />
+                {filling !== "None" && <div className="h-1" style={{ background: fillingSwatch }} />}
+                <div className="h-3.5" style={{ background: sponge }} />
+                <div className="h-2" style={{ background: frostSwatch }} />
               </div>
               <div>
                 <p className="text-[10px] font-extrabold uppercase tracking-[0.15em] text-ember">Slice view</p>
-                <p className="mt-1 text-sm font-bold">{flavour} sponge{filling !== "None" ? ` · ${filling}` : " · no filling"}</p>
+                <p className="text-xs font-bold">{flavour} sponge{filling !== "None" ? ` · ${filling}` : " · no filling"}</p>
               </div>
             </div>
           }
