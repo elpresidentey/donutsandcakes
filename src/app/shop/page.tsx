@@ -143,7 +143,7 @@ function ShopPageContent() {
       </div>
 
       <div
-        className="no-scrollbar sticky top-16 z-10 -mx-4 mt-4 flex gap-2 overflow-x-auto bg-cream/95 px-4 py-3 backdrop-blur"
+        className="sticky top-16 z-10 -mx-4 mt-4 flex flex-wrap gap-1 bg-cream/95 px-4 py-3 backdrop-blur sm:gap-2"
         role="tablist"
         aria-label="Filter treats by category"
         onKeyDown={(e) => {
@@ -173,7 +173,7 @@ function ShopPageContent() {
             tabIndex={filter === f ? 0 : -1}
             onClick={() => select(f, false)}
             className={cn(
-              "min-h-[44px] shrink-0 rounded-full px-5 text-sm font-bold transition active:scale-95",
+              "min-h-[44px] shrink-0 rounded-full px-3 text-xs font-bold transition active:scale-95 sm:px-5 sm:text-sm",
               filter === f
                 ? "bg-choco text-cream"
                 : "bg-milk text-choco shadow-sm hover:bg-sand"

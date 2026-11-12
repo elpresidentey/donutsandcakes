@@ -95,11 +95,13 @@ export default function ProductCard({ product }: { product: Product }) {
       </Link>
 
       <div className="flex flex-1 flex-col p-3 min-[380px]:p-4 sm:p-5">
-        <p className="flex items-center gap-1.5 text-[11px] font-black uppercase tracking-[0.14em] text-ember">
+        <p className="flex min-w-0 flex-wrap items-center gap-x-1.5 gap-y-1 text-[10px] font-black uppercase leading-tight tracking-[0.1em] text-ember sm:text-[11px] sm:tracking-[0.14em]">
           <span aria-hidden className="h-1.5 w-1.5 shrink-0 rounded-full bg-ember transition-transform duration-300 group-hover:scale-150" />
-          {categoryName}
+          <span className="whitespace-nowrap">{categoryName}</span>
           {product.serves && (
-            <span className="text-choco/55">· {product.serves}</span>
+            <span className="whitespace-nowrap text-[9px] tracking-normal text-choco/55 sm:text-[10px]">
+              · {product.serves}
+            </span>
           )}
         </p>
 
