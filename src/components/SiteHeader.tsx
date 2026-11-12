@@ -105,10 +105,10 @@ export default function SiteHeader() {
             className="h-full w-full origin-left scale-x-0 bg-ember"
           />
         </div>
-        <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-2 px-3 sm:gap-4 sm:px-6">
+        <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-1 px-3 min-[380px]:gap-2 sm:gap-4 sm:px-6">
           <Link href="/" className="flex min-h-[44px] items-center gap-2" aria-label="Donuts and Cakes — home">
-            <LogoMark className="h-9 w-9 animate-wiggle" />
-            <span className="font-display text-lg font-black tracking-tight sm:text-xl">
+            <LogoMark className="h-8 w-8 shrink-0 animate-wiggle min-[380px]:h-9 min-[380px]:w-9" />
+            <span className="whitespace-nowrap font-display text-base font-black tracking-tight min-[380px]:text-lg sm:text-xl">
               Donuts<span className="text-ember">&</span>Cakes
             </span>
           </Link>
@@ -138,7 +138,7 @@ export default function SiteHeader() {
 
           <Link
             href="/cart"
-            className="relative flex min-h-[44px] items-center gap-2 rounded-full bg-choco px-3 py-2 text-sm font-bold text-cream transition hover:bg-cocoa active:scale-95 sm:px-4"
+            className="relative flex min-h-[44px] shrink-0 items-center gap-2 rounded-full bg-choco px-2.5 py-2 text-sm font-bold text-cream transition hover:bg-cocoa active:scale-95 sm:px-4"
           >
             <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
               <path d="M6 6h15l-1.5 9h-12z" strokeLinejoin="round" />

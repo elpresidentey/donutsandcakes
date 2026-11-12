@@ -53,7 +53,7 @@ export default function CategoryView({
               type legible no matter how bright the photo underneath is. */}
           <div className="absolute inset-0 bg-cocoa/70" />
         </div>
-        <div className="relative mx-auto max-w-6xl px-4 pb-10 pt-20 sm:px-6 sm:pt-28">
+        <div className="relative mx-auto max-w-6xl px-4 pb-8 pt-14 sm:px-6 sm:pb-10 sm:pt-28">
           <p className="text-label uppercase text-butter">
             {products.length} treats
           </p>

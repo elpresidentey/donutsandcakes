@@ -94,7 +94,7 @@ export default function ProductCard({ product }: { product: Product }) {
         <div aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-br from-transparent via-white/15 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
       </Link>
 
-      <div className="flex flex-1 flex-col p-4 sm:p-5">
+      <div className="flex flex-1 flex-col p-3 min-[380px]:p-4 sm:p-5">
         <p className="flex items-center gap-1.5 text-[11px] font-black uppercase tracking-[0.14em] text-ember">
           <span aria-hidden className="h-1.5 w-1.5 shrink-0 rounded-full bg-ember transition-transform duration-300 group-hover:scale-150" />
           {categoryName}
@@ -151,7 +151,7 @@ export default function ProductCard({ product }: { product: Product }) {
             on one line, so below 520px the price stacks above a full-width
             Add pill, and above it the row only needs ~155px, which the 4-up
             desktop grid (~163px) still covers. */}
-        <div className="mt-auto bg-cocoa px-4 pb-3.5 pt-3">
+        <div className="mt-auto bg-cocoa px-3 pb-3.5 pt-3 sm:px-4">
           <div className="flex flex-col gap-2.5 min-[520px]:flex-row min-[520px]:items-center min-[520px]:justify-between">
             <div className="min-w-0">
               {hasPriceRange && (

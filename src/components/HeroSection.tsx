@@ -212,19 +212,19 @@ export default function HeroSection() {
             {/* Level 1 — exactly two lines, scaled to always fit the viewport.
                 Honey, not ember: over photography the ember accent drops below
                 3:1 even at this size, and honey is the system's on-dark accent. */}
-            <h1 className="mt-4 font-display text-[clamp(2.3rem,6.5vw,5.25rem)] font-black leading-[0.95] tracking-[-0.02em] text-cream animate-[slide-up_0.6s_cubic-bezier(0.22,1,0.36,1)]">
-              <span className="block whitespace-nowrap">{slide.titleA}</span>
-              <span className="block whitespace-nowrap text-honey">{slide.titleB}</span>
+            <h1 className="mt-3 font-display text-[clamp(2rem,10vw,3.4rem)] font-black leading-[0.95] tracking-[-0.02em] text-cream animate-[slide-up_0.6s_cubic-bezier(0.22,1,0.36,1)] sm:mt-4 sm:text-[clamp(3rem,6.5vw,5.25rem)]">
+              <span className="block">{slide.titleA}</span>
+              <span className="block text-honey">{slide.titleB}</span>
             </h1>
 
-            <p className="mt-6 max-w-xl text-lg font-medium leading-relaxed text-cream/90 sm:text-xl animate-[fade-up_0.7s_cubic-bezier(0.22,1,0.36,1)_0.1s_both]">
+            <p className="mt-4 max-w-xl text-base font-medium leading-relaxed text-cream/90 sm:mt-6 sm:text-xl animate-[fade-up_0.7s_cubic-bezier(0.22,1,0.36,1)_0.1s_both]">
               {slide.text}
             </p>
 
-            <div className="mt-9 flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:gap-6">
+            <div className="mt-5 flex flex-row flex-wrap items-center gap-3 sm:mt-9 sm:gap-6">
               <Link
                 href={slide.href}
-                className="relative min-h-[60px] rounded-full bg-ember px-10 py-4 font-display text-xl font-black text-white transition hover:-translate-y-0.5 hover:bg-ember-deep active:scale-95 focus:outline-none focus-visible:ring-3 focus-visible:ring-ember focus-visible:ring-offset-2 focus-visible:ring-offset-cocoa overflow-hidden"
+                className="relative min-h-[52px] rounded-full bg-ember px-7 py-3 font-display text-lg font-black text-white transition hover:-translate-y-0.5 hover:bg-ember-deep active:scale-95 focus:outline-none focus-visible:ring-3 focus-visible:ring-ember focus-visible:ring-offset-2 focus-visible:ring-offset-cocoa overflow-hidden sm:min-h-[60px] sm:px-10 sm:py-4 sm:text-xl"
               >
                 <span className="relative z-10">{slide.cta}</span>
                 {!reduced && (
@@ -239,7 +239,7 @@ export default function HeroSection() {
 
             <Link
               href="/shop"
-              className="mt-6 inline-flex min-h-[44px] items-center text-sm font-bold text-cream/90 underline-offset-4 transition hover:text-cream hover:underline focus:outline-none focus-visible:ring-3 focus-visible:ring-ember focus-visible:ring-offset-2 focus-visible:ring-offset-cocoa rounded-full px-2"
+              className="mt-3 inline-flex min-h-[44px] max-w-full items-center text-xs font-bold leading-snug text-cream/90 underline-offset-4 transition hover:text-cream hover:underline focus:outline-none focus-visible:ring-3 focus-visible:ring-ember focus-visible:ring-offset-2 focus-visible:ring-offset-cocoa rounded-full px-2 sm:mt-6 sm:text-sm"
             >
               Not ready to build? Browse what&apos;s already on the counter
               <span aria-hidden> →</span>
